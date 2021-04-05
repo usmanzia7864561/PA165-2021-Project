@@ -1,20 +1,20 @@
 package muni.pa165.dao;
 
 import muni.pa165.entity.Event;
-import muni.pa165.entity.User;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Repository
+@Transactional
 public class EventDaoImpl implements  EventDao {
-
-    private EntityManagerFactory emf;
+    @PersistenceContext
     private EntityManager entityManager;
 
-    public EventDaoImpl() {
-        this.entityManager = emf.createEntityManager();
-    }
+    public EventDaoImpl() { }
 
     @Override
     public void create(Event event) {

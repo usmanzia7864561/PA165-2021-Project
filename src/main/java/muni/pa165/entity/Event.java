@@ -2,10 +2,7 @@ package muni.pa165.entity;
 import muni.pa165.enums.EventType;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -20,12 +17,9 @@ public class Event {
 
     @NotNull
     @Column(nullable = false)
-    @Min(3)
-    @Max(120)
     private String name;
 
     @Column
-    @Max(512)
     private String description ;
 
     @Column(nullable = false)
@@ -44,7 +38,16 @@ public class Event {
     @OneToOne
     private User createdBy;
 
-    public Event(@NotNull @Min(3) @Max(120) String name, @Max(512) String description, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType, User createdBy) {
+    public Event(@NotNull String name, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType, User createdBy) {
+        this.name = name;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.eventDate = eventDate;
+        this.eventType = eventType;
+        this.createdBy = createdBy;
+    }
+
+    public Event(@NotNull String name, String description, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType, User createdBy) {
         this.name = name;
         this.description = description;
         this.startTime = startTime;
@@ -52,6 +55,10 @@ public class Event {
         this.eventDate = eventDate;
         this.eventType = eventType;
         this.createdBy = createdBy;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
@@ -65,6 +72,20 @@ public class Event {
     @Override
     public int hashCode() {
         return Objects.hash(name, startTime, eventDate, createdBy);
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", eventDate=" + eventDate +
+                ", eventType=" + eventType +
+                ", createdBy=" + createdBy +
+                '}';
     }
 }
 

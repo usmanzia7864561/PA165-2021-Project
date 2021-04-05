@@ -1,18 +1,20 @@
 package muni.pa165.dao;
 
 import muni.pa165.entity.User;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Repository
+@Transactional
 public class UserDaoImpl implements UserDao{
-    private EntityManagerFactory emf;
+    @PersistenceContext
     private EntityManager entityManager;
 
-    public UserDaoImpl() {
-        this.entityManager = emf.createEntityManager();
-    }
+    public UserDaoImpl() { }
 
     @Override
     public void create(User user) {
@@ -21,7 +23,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> findAll() {
-        return this.entityManager.createQuery("select u from user u",User.class).getResultList();
+        return this.entityManager.createQuery("select u from User u",User.class).getResultList();
     }
 
     @Override
@@ -36,6 +38,6 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> findByName(String name) {
-        return this.entityManager.createQuery("select u from user u where name=:name",User.class).setParameter("name",name).getResultList();
+        return this.entityManager.createQuery("select u from User u where name=:name",User.class).setParameter("name",name).getResultList();
     }
 }

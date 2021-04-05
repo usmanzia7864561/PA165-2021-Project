@@ -3,18 +3,18 @@ package muni.pa165.entity;
 import muni.pa165.enums.UserType;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Set;
 
 @Entity
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Column(nullable = false)
     private String name;
 
@@ -22,8 +22,6 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    @Min(6)
-    @Max(32)
     private String password;
 
     @Column
@@ -32,16 +30,66 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType type;
 
+    @OneToMany(mappedBy = "createdBy")
+    private Set<Event> events;
 
+    /**
+     * @param name
+     * @param email
+     * @param password
+     * @param type
+     */
+    public User(String name, String email, String password, UserType type) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.createdAt = LocalDateTime.now();
+        this.type = type;
+    }
 
-    public User(Long id, @NotNull String name, String email, @Min(6) @Max(32) String password, UserType type) {
-        this.id = id;
+    /**
+     * @param name
+     * @param email
+     * @param password
+     * @param type
+     * @param events
+     */
+    public User(@NotNull String name, String email, String password, UserType type,Set<Event> events) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.type = type;
+        this.events = events;
 
         this.createdAt = LocalDateTime.now();
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public UserType getType() {
+        return this.type;
+    }
+
+    public Set<Event> getEvents() {
+        return Collections.unmodifiableSet(this.events);
     }
 
     @Override
