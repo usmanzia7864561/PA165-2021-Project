@@ -6,9 +6,9 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Event entity
+ * Court entity
  *
- * @author Usman Zia
+ * @author Muhammad Usman
  */
 @Entity
 public class Court {

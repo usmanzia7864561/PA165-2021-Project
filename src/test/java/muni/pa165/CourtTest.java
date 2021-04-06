@@ -30,6 +30,8 @@ public class CourtTest extends AbstractTestNGSpringContextTests {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
 
+
+
             Court court = new Court("Golf Court","Brno","grass",true);
             entityManager.persist(court);
 
