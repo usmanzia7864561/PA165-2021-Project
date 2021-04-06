@@ -14,6 +14,12 @@ import javax.persistence.PersistenceUnit;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Event test for CRUD
+ *
+ * @author Muhammad Abdullah
+ */
+
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 public class EventTest extends AbstractTestNGSpringContextTests {
     @PersistenceUnit
