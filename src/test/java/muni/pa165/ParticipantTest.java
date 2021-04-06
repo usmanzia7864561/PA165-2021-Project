@@ -14,6 +14,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import java.time.LocalDate;
 import java.time.LocalTime;
+/**
+ * Participant test for CRUD
+ *
+ * @author Muhammad Usman
+ */
 
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 public class ParticipantTest  extends AbstractTestNGSpringContextTests
