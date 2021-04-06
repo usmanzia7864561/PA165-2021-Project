@@ -61,6 +61,14 @@ public class Event {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
