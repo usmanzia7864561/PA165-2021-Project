@@ -8,6 +8,12 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
+
+/**
+ * Event DAO Implementitation
+ *
+ * @author Usman Zia
+ */
 @Repository
 @Transactional
 public class EventDaoImpl implements  EventDao {

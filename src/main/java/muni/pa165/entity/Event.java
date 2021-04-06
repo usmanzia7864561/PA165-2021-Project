@@ -8,6 +8,11 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 
+/**
+ * Event entity
+ *
+ * @author Usman Zia
+ */
 @Entity
 public class Event {
 

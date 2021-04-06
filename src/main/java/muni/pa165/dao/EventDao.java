@@ -4,6 +4,11 @@ import muni.pa165.entity.Event;
 
 import java.util.List;
 
+/**
+ * Event Data Access Object
+ *
+ * @author Usman Zia
+ */
 public interface EventDao {
 
     void create(Event event);
