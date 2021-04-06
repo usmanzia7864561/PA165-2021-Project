@@ -8,6 +8,12 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * User entity
+ *
+ * @author Muhammad Abdullah
+ */
+
 @Entity
 @Table(name = "Users")
 public class User {

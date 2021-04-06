@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PA165-2021-Project" target="16" />
+      <module name="PA165-2021-Project" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

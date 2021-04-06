@@ -1,0 +1,10 @@
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/dao/UserDaoImpl.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/entity/User.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/enums/UserType.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/dao/EventDaoImpl.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/dao/EventDao.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/Main.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/entity/Event.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/enums/EventType.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/PersistenceApplicationContext.java
+/home/pc/UniWork/EnteripesJava/PA165-2021-Project/src/main/java/muni/pa165/dao/UserDao.java

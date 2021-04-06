@@ -5,7 +5,9 @@ import muni.pa165.entity.User;
 import java.util.List;
 
 /**
- * Created by Muhammad Abdullah on 05.04.2021.
+ * User Data access object interface
+ *
+ * @author Muhammad Abdullah
  */
 
 public interface UserDao {
