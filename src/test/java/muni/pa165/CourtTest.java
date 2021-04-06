@@ -1,10 +1,6 @@
 package muni.pa165;
 
 import muni.pa165.entity.Court;
-import muni.pa165.entity.Event;
-import muni.pa165.entity.User;
-import muni.pa165.enums.EventType;
-import muni.pa165.enums.UserType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
@@ -12,9 +8,12 @@ import org.testng.annotations.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
+/**
+ * Court Test
+ *
+ * @author Muhammad Abdullah
+ */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 public class CourtTest extends AbstractTestNGSpringContextTests {
     @PersistenceUnit

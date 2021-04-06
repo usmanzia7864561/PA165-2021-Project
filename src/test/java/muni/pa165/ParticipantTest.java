@@ -1,12 +1,17 @@
 package muni.pa165;
 
-import muni.pa165.entity.Court;
 import muni.pa165.entity.Event;
 import muni.pa165.entity.Participant;
 import muni.pa165.entity.User;
 import muni.pa165.enums.EventType;
 import muni.pa165.enums.UserType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.Test;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -39,7 +44,7 @@ public class ParticipantTest  extends AbstractTestNGSpringContextTests
             entityManager.persist(participant);
 
             Participant participantFound = entityManager.find(Participant.class, participant.getId());
-            assert courtFound.equals(participant);
+            assert participantFound.equals(participant);
             entityManager.getTransaction().commit();
         }finally {
             if (entityManager != null) entityManager.close();

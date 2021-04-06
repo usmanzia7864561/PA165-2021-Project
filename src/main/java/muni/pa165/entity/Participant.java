@@ -1,7 +1,6 @@
 package muni.pa165.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Participant {
@@ -18,6 +17,10 @@ public class Participant {
     public Participant(String name, Event event) {
         this.name = name;
         this.event = event;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
