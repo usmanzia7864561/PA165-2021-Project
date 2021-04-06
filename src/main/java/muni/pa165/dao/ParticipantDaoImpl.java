@@ -5,6 +5,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+/*
+  * Participant Data access object implementation
+  *
+  * @author Muhammad Abdullah
+ */
+
 public class ParticipantDaoImpl implements ParticipantDao {
     @PersistenceContext
     private EntityManager entityManager;
@@ -18,7 +24,7 @@ public class ParticipantDaoImpl implements ParticipantDao {
 
     @Override
     public List<Participant> findAll() {
-        return this.entityManager.createQuery("select u from User u",Participant.class).getResultList();
+        return this.entityManager.createQuery("select p from Participant p",Participant.class).getResultList();
     }
 
     @Override
@@ -33,6 +39,6 @@ public class ParticipantDaoImpl implements ParticipantDao {
 
     @Override
     public List<Participant> findByName(String name) {
-        return this.entityManager.createQuery("select u from User u where name=:name",Participant.class).setParameter("name",name).getResultList();
+        return this.entityManager.createQuery("select p from Participant p where name=:name",Participant.class).setParameter("name",name).getResultList();
     }
 }

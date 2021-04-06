@@ -43,6 +43,9 @@ public class Event {
     @OneToOne
     private User createdBy;
 
+    @OneToOne
+    private Court court;
+
     public Event(@NotNull String name, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType, User createdBy) {
         this.name = name;
         this.startTime = startTime;

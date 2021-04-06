@@ -1,8 +1,12 @@
 package muni.pa165.dao;
 
 import muni.pa165.entity.Court;
+import org.springframework.stereotype.Repository;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**

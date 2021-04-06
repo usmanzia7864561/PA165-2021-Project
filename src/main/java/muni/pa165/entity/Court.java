@@ -1,5 +1,7 @@
 package muni.pa165.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,8 +30,15 @@ public class Court {
     @Column(nullable = false)
     private Boolean isAvailable;
 
-    @OneToMany
+    @OneToMany(mappedBy = "court")
     private Set<Event> events;
+
+    public Court(String name, String location, String type, Boolean isAvailable) {
+        this.name = name;
+        this.location = location;
+        this.type = type;
+        this.isAvailable = isAvailable;
+    }
 
     public Court(String name, String location, String type, Boolean isAvailable, Set<Event> events) {
         this.name = name;
