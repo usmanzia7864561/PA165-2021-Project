@@ -32,7 +32,7 @@ public class UserTest extends AbstractTestNGSpringContextTests {
             entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
 
-            User manager = new User("Ahmad","ahmad@example.com","123456", UserType.MANAGER);
+            User manager = new User("Ahmad","ahmaduser@example.com","123456", UserType.MANAGER);
             entityManager.persist(manager);
 
             User tennis_user = new User("Tennis","tennis@example.com","123456", UserType.TENNIS_USER);
