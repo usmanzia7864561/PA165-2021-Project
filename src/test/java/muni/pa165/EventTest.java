@@ -49,8 +49,12 @@ public class EventTest extends AbstractTestNGSpringContextTests {
         manager = new User("Manager","example@email.com","123456", UserType.MANAGER);
         userDao.create(manager);
 
-        e1 = new Event("ABC Tournament", LocalTime.NOON,LocalTime.MIDNIGHT, LocalDate.now(), EventType.TOURNAMENT, manager);
-        e2 = new Event("Tennis Lesson", LocalTime.of(8,15),LocalTime.of(10,15), LocalDate.of(2021,12,12), EventType.LESSON, manager);
+        e1 = new Event("ABC Tournament", LocalTime.NOON,LocalTime.MIDNIGHT, LocalDate.now(), EventType.TOURNAMENT);
+        e2 = new Event("Tennis Lesson", LocalTime.of(8,15),LocalTime.of(10,15), LocalDate.of(2021,12,12), EventType.LESSON);
+
+        e1.setUser(manager);
+        e2.setUser(manager);
+
         eventDao.create(e1);
         eventDao.create(e2);
     }

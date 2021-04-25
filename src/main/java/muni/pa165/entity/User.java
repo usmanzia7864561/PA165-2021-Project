@@ -36,7 +36,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType type;
 
-    @OneToMany(mappedBy = "createdBy")
+    @OneToMany(mappedBy = "user")
     private Set<Event> events;
 
     /**
@@ -96,6 +96,11 @@ public class User {
 
     public Set<Event> getEvents() {
         return Collections.unmodifiableSet(this.events);
+    }
+
+    public void addEvent(Event event) {
+        this.events.add(event);
+        event.setUser(this);
     }
 
     @Override

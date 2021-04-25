@@ -1,6 +1,8 @@
 package muni.pa165.dao;
 
 import muni.pa165.entity.Participant;
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
   * @author Muhammad Abdullah
  */
 
+@Repository
 public class ParticipantDaoImpl implements ParticipantDao {
     @PersistenceContext
     private EntityManager entityManager;

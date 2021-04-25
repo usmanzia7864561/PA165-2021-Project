@@ -40,29 +40,31 @@ public class Event {
     @Enumerated
     private EventType eventType;
 
-    @OneToOne
-    private User createdBy;
+    @ManyToOne
+    private User user;
 
     @ManyToOne
     private Court court;
 
-    public Event(@NotNull String name, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType, User createdBy) {
+    public Event() {
+    }
+
+    public Event(@NotNull String name, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType) {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventDate = eventDate;
         this.eventType = eventType;
-        this.createdBy = createdBy;
     }
 
-    public Event(@NotNull String name, String description, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType, User createdBy) {
+    public Event(@NotNull String name, String description, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType, User user) {
         this.name = name;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventDate = eventDate;
         this.eventType = eventType;
-        this.createdBy = createdBy;
+        this.user = user;
     }
 
     public Long getId() {
@@ -73,21 +75,28 @@ public class Event {
         return name;
     }
 
-    public User getCreatedBy() {
-        return createdBy;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Court getCourt() { return this.court; }
+    public void setCourt(Court court) { this.court = court; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Event)) return false;
         Event event = (Event) o;
-        return name.equals(event.name) && startTime.equals(event.startTime) && eventDate.equals(event.eventDate) && createdBy.equals(event.createdBy);
+        return name.equals(event.name) && startTime.equals(event.startTime) && eventDate.equals(event.eventDate) && user.equals(event.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, startTime, eventDate, createdBy);
+        return Objects.hash(name, startTime, eventDate, user);
     }
 
     @Override
@@ -100,7 +109,7 @@ public class Event {
                 ", endTime=" + endTime +
                 ", eventDate=" + eventDate +
                 ", eventType=" + eventType +
-                ", createdBy=" + createdBy +
+                ", createdBy=" + user +
                 '}';
     }
 }

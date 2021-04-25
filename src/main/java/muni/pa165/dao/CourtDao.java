@@ -2,7 +2,6 @@ package muni.pa165.dao;
 
 import muni.pa165.entity.Court;
 
-
 import java.util.List;
 import java.util.Optional;
 

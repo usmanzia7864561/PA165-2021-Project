@@ -41,7 +41,9 @@ public class ParticipantTest  extends AbstractTestNGSpringContextTests
             User ahmad = new User("Ahmad","ahmadparti@example.com","123456", UserType.MANAGER);
             entityManager.persist(ahmad);
 
-            Event event = new Event("Tennis", LocalTime.now(),LocalTime.now().plusHours(2), LocalDate.now().plusDays(2), EventType.LESSON,ahmad);
+            Event event = new Event("Tennis", LocalTime.now(),LocalTime.now().plusHours(2), LocalDate.now().plusDays(2), EventType.LESSON);
+            event.setUser(ahmad);
+
             entityManager.persist(event);
 
 

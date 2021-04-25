@@ -20,6 +20,8 @@ public class CourtDaoImpl implements CourtDao
     @PersistenceContext
     private EntityManager entityManager;
 
+    public CourtDaoImpl() { }
+
     @Override
     public void create(Court court) {
         this.entityManager.persist(court);

@@ -2,6 +2,7 @@ package muni.pa165.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,7 +32,10 @@ public class Court {
     private Boolean isAvailable;
 
     @OneToMany(mappedBy = "court")
-    private Set<Event> events;
+    private Set<Event> events = new HashSet<>();
+
+    public Court() {
+    }
 
     public Court(String name, String location, String type, Boolean isAvailable) {
         this.name = name;
@@ -56,8 +60,17 @@ public class Court {
         return isAvailable;
     }
 
+    public void addEvent(Event event) {
+        this.events.add(event);
+        event.setCourt(this);
+    }
+
     public Set<Event> getEvents() {
         return events;
+    }
+
+    public void removeEvent(Event event) {
+        this.events.remove(event);
     }
 
     @Override
