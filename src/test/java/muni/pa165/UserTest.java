@@ -2,6 +2,7 @@ package muni.pa165;
 
 import muni.pa165.dao.EventDao;
 import muni.pa165.dao.UserDao;
+import muni.pa165.entity.Court;
 import muni.pa165.entity.Event;
 import muni.pa165.entity.User;
 import muni.pa165.enums.EventType;
@@ -65,6 +66,24 @@ public class UserTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(storedUsers.containsAll(List.of(manager, participant)));
     }
 
+    @Test
+    public void createAndFindUserByType(){
+        // Save Manager
+        manager = new User("Manager","example858email.com","123456", UserType.MANAGER);
+        userDao.create(manager);
+        //Save Participant
+        participant = new User("Participant","participant55114@email.com","123456", UserType.TENNIS_USER);
+        userDao.create(participant);
+
+
+        List<User> userManager = userDao.findByType(UserType.MANAGER);
+//        //By Manager
+        Assert.assertTrue(userManager.containsAll(List.of(manager)));
+
+//        //By Participant
+          List<User> userParticipant = userDao.findByType(UserType.TENNIS_USER);
+          Assert.assertTrue(userParticipant.containsAll(List.of(participant)));
+    }
 
     @Test
     public void fetchAllTest(){
