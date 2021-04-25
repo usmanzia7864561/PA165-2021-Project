@@ -1,9 +1,11 @@
 package muni.pa165.dao;
 
 import muni.pa165.entity.User;
+import muni.pa165.enums.UserType;
 
 import java.util.List;
 
+import java.util.Optional;
 /**
  * User Data access object interface
  *
@@ -16,7 +18,9 @@ public interface UserDao {
 
     List<User> findAll();
 
-    User findById(Long id);
+    Optional<User> findById(Long id);
+
+    List<User> findByType(UserType type);
 
     void remove(User user);
 
