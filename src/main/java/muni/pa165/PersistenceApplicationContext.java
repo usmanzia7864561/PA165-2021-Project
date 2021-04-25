@@ -21,7 +21,7 @@ import java.util.Objects;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackages = "cz.fi.muni.pa165")
+@ComponentScan(basePackages = "muni.pa165")
 public class PersistenceApplicationContext {
 
     /**

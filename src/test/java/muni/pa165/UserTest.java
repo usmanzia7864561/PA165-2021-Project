@@ -7,7 +7,9 @@ import muni.pa165.entity.User;
 import muni.pa165.enums.EventType;
 import muni.pa165.enums.UserType;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -29,6 +32,8 @@ import java.util.Optional;
  * @author Usman Zia
  */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class UserTest extends AbstractTestNGSpringContextTests {
 
     @PersistenceContext
@@ -42,7 +47,6 @@ public class UserTest extends AbstractTestNGSpringContextTests {
 
     private User participant;
 
-    private User participant1;
 
 
 
@@ -51,10 +55,10 @@ public class UserTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void createAndFindUser(){
         // Save Manager
-        manager = new User("Manager","example888@email.com","123456", UserType.MANAGER);
+        manager = new User("Manager","example814785@email.com","123456", UserType.MANAGER);
         userDao.create(manager);
         //Save Participant
-        participant = new User("Participant","participant55@email.com","123456", UserType.TENNIS_USER);
+        participant = new User("Participant","participant551djdk@email.com","123456", UserType.TENNIS_USER);
         userDao.create(participant);
 
         List<User> storedUsers = userDao.findAll();
