@@ -1,11 +1,14 @@
 package muni.pa165.dao;
 
 import muni.pa165.entity.User;
+import muni.pa165.enums.UserType;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * User Data access object implementation
@@ -31,8 +34,18 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User findById(Long id) {
-        return this.entityManager.find(User.class,id);
+    public Optional<User> findById(Long id)
+    {
+        try{
+            return Optional.ofNullable(this.entityManager.find(User.class,id));
+        }catch (NoResultException exception){
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public List<User> findByType(UserType type){
+        return this.entityManager.createQuery("select u from User u where type=:type",User.class).setParameter("type",type).getResultList();
     }
 
     @Override
