@@ -3,6 +3,7 @@ package muni.pa165.dao;
 import muni.pa165.entity.Event;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Event Data Access Object
@@ -15,7 +16,7 @@ public interface EventDao {
 
     List<Event> findAll();
 
-    Event findById(Long id);
+    Optional<Event> findById(Long id);
 
     void remove(Event event);
 

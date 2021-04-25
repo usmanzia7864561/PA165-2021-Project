@@ -3,11 +3,11 @@ package muni.pa165.dao;
 import muni.pa165.entity.Court;
 import org.springframework.stereotype.Repository;
 
-
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Court DAO Implementation
@@ -15,13 +15,10 @@ import java.util.List;
  * @author Muhammad Usman
  */
 @Repository
-@Transactional
 public class CourtDaoImpl implements CourtDao
 {
     @PersistenceContext
     private EntityManager entityManager;
-
-    public CourtDaoImpl() { }
 
     @Override
     public void create(Court court) {
@@ -34,8 +31,12 @@ public class CourtDaoImpl implements CourtDao
     }
 
     @Override
-    public Court findById(Long id) {
-        return this.entityManager.find(Court.class,id);
+    public Optional<Court> findById(Long id) {
+        try{
+            return Optional.ofNullable(this.entityManager.find(Court.class,id));
+        }catch (NoResultException noResultException){
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -47,7 +48,4 @@ public class CourtDaoImpl implements CourtDao
     public List<Court> findByName(String name) {
         return this.entityManager.createQuery("select c from Court c where name=:name",Court.class).setParameter("name",name).getResultList();
     }
-
-
-
 }

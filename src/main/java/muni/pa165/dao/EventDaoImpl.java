@@ -4,9 +4,11 @@ import muni.pa165.entity.Event;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -33,8 +35,12 @@ public class EventDaoImpl implements  EventDao {
     }
 
     @Override
-    public Event findById(Long id) {
-        return this.entityManager.find(Event.class,id);
+    public Optional<Event> findById(Long id) {
+        try{
+            return Optional.ofNullable(this.entityManager.find(Event.class,id));
+        }catch (NoResultException exception){
+            return Optional.empty();
+        }
     }
 
     @Override

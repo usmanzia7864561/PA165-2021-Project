@@ -1,13 +1,19 @@
 package muni.pa165;
 
+import muni.pa165.dao.CourtDao;
 import muni.pa165.entity.Court;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.inject.*;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Court Test
@@ -15,30 +21,51 @@ import javax.persistence.PersistenceUnit;
  * @author Muhammad Abdullah
  */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
+@Transactional
 public class CourtTest extends AbstractTestNGSpringContextTests {
-    @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Inject
+    private CourtDao courtDao;
+
+    private Court c1;
+    private Court c2;
 
     public CourtTest() { }
 
+    @BeforeMethod
+    public void createCourts(){
+        c1 = new Court("Tennis Court","Brno","grass",true);
+        c2 = new Court("A1 Block Court","Brno","clay",false);
+
+        courtDao.create(c1);
+        courtDao.create(c2);
+    }
+
     @Test
-    public void courtTest(){
-        EntityManager entityManager = null;
+    public void fetchAllTest(){
+        List<Court> courts = courtDao.findAll();
 
-        try{
-            entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
+        Assert.assertTrue(courts.containsAll(List.of(c1,c2)));
+    }
 
+    @Test
+    public void fetchById(){
+        Optional<Court> grassCourt = courtDao.findById(c1.getId());
 
+        Assert.assertTrue(grassCourt.isPresent());
+        Assert.assertEquals(grassCourt, Optional.of(c1));
+    }
 
-            Court court = new Court("Golf Court","Brno","grass",true);
-            entityManager.persist(court);
+    @Test
+    public void removeTest(){
+        Assert.assertEquals(courtDao.findAll().size(),2);
 
-            Court courtFound = entityManager.find(Court.class, court.getId());
-            assert courtFound.equals(court);
-            entityManager.getTransaction().commit();
-        }finally {
-            if (entityManager != null) entityManager.close();
-        }
+        courtDao.remove(c1);
+        Assert.assertEquals(courtDao.findAll().size(),1);
+
+        courtDao.remove(c2);
+        Assert.assertEquals(courtDao.findAll().size(),0);
     }
 }

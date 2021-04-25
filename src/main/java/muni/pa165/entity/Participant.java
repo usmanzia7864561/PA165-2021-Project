@@ -9,10 +9,10 @@ public class Participant {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private final String name;
 
     @OneToOne
-    private Event event;
+    private final Event event;
 
     public Participant(String name, Event event) {
         this.name = name;

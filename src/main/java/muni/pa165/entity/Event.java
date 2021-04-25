@@ -43,7 +43,7 @@ public class Event {
     @OneToOne
     private User createdBy;
 
-    @OneToOne
+    @ManyToOne
     private Court court;
 
     public Event(@NotNull String name, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType, User createdBy) {

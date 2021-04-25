@@ -52,7 +52,7 @@ public class Court {
         return id;
     }
 
-    public Boolean getAvailable() {
+    public Boolean isCourtAvailable() {
         return isAvailable;
     }
 
