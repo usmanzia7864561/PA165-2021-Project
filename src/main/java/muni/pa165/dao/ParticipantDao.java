@@ -2,6 +2,7 @@ package muni.pa165.dao;
 
 import muni.pa165.entity.Participant;
 import java.util.List;
+import java.util.Optional;
 
 /*
  * Participant Data access object interface
@@ -30,7 +31,7 @@ public interface ParticipantDao {
      * @param id
      * @return
      */
-    Participant findById(Long id);
+    Optional<Participant> findById(Long id);
 
     /**
      * Remove a specific participant for database

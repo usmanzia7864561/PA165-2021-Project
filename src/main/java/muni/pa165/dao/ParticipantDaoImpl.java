@@ -1,11 +1,14 @@
 package muni.pa165.dao;
 
+import muni.pa165.entity.Event;
 import muni.pa165.entity.Participant;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 /*
   * Participant Data access object implementation
@@ -31,8 +34,16 @@ public class ParticipantDaoImpl implements ParticipantDao {
     }
 
     @Override
-    public Participant findById(Long id) {
-        return this.entityManager.find(Participant.class,id);
+    public Optional<Participant> findById(Long id)
+    {
+        try{
+            return Optional.ofNullable(this.entityManager.find(Participant.class,id));
+        }catch (NoResultException exception){
+            return Optional.empty();
+        }
+
+
+
     }
 
     @Override
