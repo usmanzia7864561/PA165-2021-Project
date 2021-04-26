@@ -34,8 +34,7 @@ public class Court {
     @OneToMany(mappedBy = "court")
     private Set<Event> events = new HashSet<>();
 
-    public Court() {
-    }
+    public Court() { }
 
     public Court(String name, String location, String type, Boolean isAvailable) {
         this.name = name;
@@ -62,7 +61,6 @@ public class Court {
 
     public void addEvent(Event event) {
         this.events.add(event);
-        event.setCourt(this);
     }
 
     public Set<Event> getEvents() {

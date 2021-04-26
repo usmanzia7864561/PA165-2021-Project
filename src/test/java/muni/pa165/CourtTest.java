@@ -32,7 +32,7 @@ import java.util.Set;
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class CourtDaoTest extends AbstractTestNGSpringContextTests {
+public class CourtTest extends AbstractTestNGSpringContextTests {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -45,7 +45,7 @@ public class CourtDaoTest extends AbstractTestNGSpringContextTests {
     private Event e1;
     private Event e2;
 
-    public CourtDaoTest() { }
+    public CourtTest() { }
 
     @BeforeMethod
     public void createCourts(){

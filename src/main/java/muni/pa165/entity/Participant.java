@@ -9,18 +9,30 @@ public class Participant {
     private Long id;
 
     @Column(nullable = false)
-    private final String name;
+    private String name;
 
-    @OneToOne
-    private final Event event;
+    @ManyToOne
+    private Event event;
 
-    public Participant(String name, Event event) {
+    public Participant(){
+
+    }
+
+    public Participant(String name) {
         this.name = name;
-        this.event = event;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setEvent(Event event){
+        this.event = event;
+    }
+
+    @PreRemove
+    public void removeParticipantFromEvent(){
+        this.event.removeParticipant(this);
     }
 
     @Override
@@ -46,7 +58,8 @@ public class Participant {
         return "Participant{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", event=" + event +
+                ", event=" + event.getName() +
+                ", event manager=" + event.getUser() +
                 '}';
     }
 }

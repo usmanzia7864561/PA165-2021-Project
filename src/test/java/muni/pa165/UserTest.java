@@ -1,10 +1,7 @@
 package muni.pa165;
 
-import muni.pa165.dao.EventDao;
 import muni.pa165.dao.UserDao;
-import muni.pa165.entity.Event;
 import muni.pa165.entity.User;
-import muni.pa165.enums.EventType;
 import muni.pa165.enums.UserType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -14,14 +11,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.inject.Inject;
+import javax.inject.*;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 

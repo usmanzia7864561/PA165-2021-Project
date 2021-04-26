@@ -47,7 +47,7 @@ public class ParticipantTest  extends AbstractTestNGSpringContextTests
             entityManager.persist(event);
 
 
-            Participant participant = new Participant("Robert Kelly",event);
+            Participant participant = new Participant("Robert Kelly");
             entityManager.persist(participant);
 
             Participant participantFound = entityManager.find(Participant.class, participant.getId());

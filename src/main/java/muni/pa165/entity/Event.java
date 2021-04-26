@@ -5,7 +5,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -46,8 +48,11 @@ public class Event {
     @ManyToOne
     private Court court;
 
-    public Event() {
-    }
+    @OneToMany
+    @MapsId("event")
+    private Set<Participant> participants = new HashSet<>();
+
+    public Event() { }
 
     public Event(@NotNull String name, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType eventType) {
         this.name = name;
@@ -84,7 +89,29 @@ public class Event {
     }
 
     public Court getCourt() { return this.court; }
-    public void setCourt(Court court) { this.court = court; }
+
+    public void setCourt(Court court) {
+        this.court = court;
+        court.addEvent(this);
+    }
+
+    public void addParticipant(Participant participant){
+        participant.setEvent(this);
+        this.participants.add(participant);
+    }
+
+    public Set<Participant> getParticipants(){
+        return this.participants;
+    }
+
+    public void removeParticipant(Participant participant){
+        this.participants.remove(participant);
+    }
+
+    @PreRemove
+    public void removeEventFromCourt(){
+        this.court.removeEvent(this);
+    }
 
     @Override
     public boolean equals(Object o) {
