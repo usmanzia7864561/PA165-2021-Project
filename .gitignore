@@ -1,3 +1,7 @@
 .idea
 target
 PA165-2021-Project.iml
+
+services/services.iml
+persistance/persistance.iml
+api/api.iml
