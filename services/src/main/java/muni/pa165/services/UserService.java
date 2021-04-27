@@ -2,6 +2,9 @@ package muni.pa165.services;
 
 import muni.pa165.persistence.entity.User;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface UserService {
 
     /**
@@ -22,9 +25,9 @@ public interface UserService {
     /**
      * Check if the given user is admin.
      */
-    boolean isAdmin(User u);
+    boolean isManager(User u);
 
-    User findUserById(Long userId);
+    Optional<User> findUserById(Long userId);
 
-    User findUserByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 }

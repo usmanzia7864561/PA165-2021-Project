@@ -1,28 +1,18 @@
 package muni.pa165.api.dto;
-import java.util.Date;
 
-public class UserDTO
-{
+import muni.pa165.persistence.enums.UserType;
+
+import java.time.LocalDateTime;
+
+public class UserDTO {
     private Long id;
-  
-    private String passwordHash;
-    
     private String email;
-    
-    private String givenName;
+    private String passwordHash;
+    private LocalDateTime createdAt;
+    private UserType type;
 
-    private String surname;
-    
-    private String phone;
-    
-    private String address;
-    
-    private Date joinedDate;
+    public UserDTO() { }
 
-    public UserDTO(){
-        
-    }
-    
     public Long getId() {
         return id;
     }
@@ -47,49 +37,20 @@ public class UserDTO
         this.email = email;
     }
 
-
-    public String getGivenName() {
-        return givenName;
+    public LocalDateTime getJoinedDate() {
+        return createdAt;
     }
 
-
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-
-    public String getSurname() {
-        return surname;
+    public UserType getType() {
+        return type;
     }
 
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Date getJoinedDate() {
-        return joinedDate;
-    }
-
-    public void setJoinedDate(Date joinedDate) {
-        this.joinedDate = joinedDate;
+    public void setType(UserType type) {
+        this.type = type;
     }
 
     @Override
@@ -119,11 +80,9 @@ public class UserDTO
                 "id=" + id +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", email='" + email + '\'' +
-                ", givenName='" + givenName + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", joinedDate=" + joinedDate +
+                ", givenName='" + type + '\'' +
+                ", joinedDate=" + createdAt +
                 '}';
     }
+
 }

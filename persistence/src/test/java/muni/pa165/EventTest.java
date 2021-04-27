@@ -141,6 +141,7 @@ public class EventTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(e1.getParticipants().containsAll(List.of(p1, p2)));
 
         e1.removeParticipant(p2);
+        entityManager.flush();
 
         Assert.assertEquals(e1.getParticipants().size(), 1);
         Assert.assertFalse(e1.getParticipants().contains(p2));
