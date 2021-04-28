@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +50,17 @@ public class EventDaoImpl implements  EventDao {
     @Override
     public List<Event> findByName(String name) {
         return this.entityManager.createQuery("select e from Event e where name=:name",Event.class).setParameter("name",name).getResultList();
+    }
+
+    @Override
+    public List<Event> findByRange(LocalDate startDate, Optional<LocalDate> endDate) {
+        if (endDate.isEmpty()){
+            return this.entityManager.createQuery("select e from Event e where startDate=:startDate",Event.class).setParameter("startDate",startDate).getResultList();
+        }else{
+            return this.entityManager.createQuery("select e from Event e where startDate BETWEEN :startDate AND :endDate",Event.class).
+                    setParameter("startDate",startDate)
+                    .setParameter("endDate",endDate.get()).getResultList();
+        }
+
     }
 }
