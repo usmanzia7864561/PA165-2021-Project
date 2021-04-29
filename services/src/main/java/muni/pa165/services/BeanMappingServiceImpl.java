@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Taken from the eshop project from github
+ */
 @Service
 public class BeanMappingServiceImpl implements BeanMappingService {
-	
 	@Autowired
     private Mapper dozer;
 
