@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * Implementation of UserFacade interface
+ * @author Muhammad Abdullah
+ */
 public class UserFacadeImpl implements UserFacade {
     @Autowired
     private UserService userService;
@@ -31,9 +35,9 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void registerUser(UserDTO u, String unencryptedPassword) {
+    public void registerUser(UserDTO u) {
         User userEntity = beanMappingService.mapTo(u, User.class);
-        userService.registerUser(userEntity, unencryptedPassword);
+        userService.registerUser(userEntity);
         u.setId(userEntity.getId());
     }
 
@@ -44,7 +48,7 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public boolean authenticate(UserAuthenticateDTO u) {
-        Optional<User> user = userService.findUserById(u.getUserId());
+        Optional<User> user = userService.findUserById(u.getEmail());
         return user.isPresent() && userService.authenticate(user.get(), u.getPassword());
     }
 

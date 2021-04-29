@@ -1,17 +1,38 @@
 package muni.pa165.api.dto;
 
+import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.enums.UserType;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 public class UserDTO {
     private Long id;
+
+    @NotBlank
+    private String name;
+
+    @Email
     private String email;
+
+    @Size(min = 6,max = 32)
     private String passwordHash;
-    private LocalDateTime createdAt;
+
+    @NotBlank
     private UserType type;
 
+    private Set<Event> events;
+
     public UserDTO() { }
+
+    public UserDTO(String name, String email, String passwordHash, UserType type) {
+        this.name = name;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.type = type;
+    }
 
     public Long getId() {
         return id;
@@ -37,20 +58,24 @@ public class UserDTO {
         this.email = email;
     }
 
-    public LocalDateTime getJoinedDate() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public UserType getType() {
         return type;
     }
 
     public void setType(UserType type) {
         this.type = type;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
     @Override
@@ -81,8 +106,6 @@ public class UserDTO {
                 ", passwordHash='" + passwordHash + '\'' +
                 ", email='" + email + '\'' +
                 ", givenName='" + type + '\'' +
-                ", joinedDate=" + createdAt +
                 '}';
     }
-
 }
