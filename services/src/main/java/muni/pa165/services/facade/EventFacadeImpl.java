@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class EventFacadeImpl implements EventFacade {
 
@@ -20,7 +21,7 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public EventDTO findEventById(Long eventId) {
-        List<Event> event = eventService.getEventById(eventId);
+        Optional<Event> event = eventService.getEventById(eventId);
         return event.isEmpty() ? null : beanMappingService.mapTo((Object) event, EventDTO.class);
     }
 

@@ -54,6 +54,8 @@ public class UserTest extends AbstractTestNGSpringContextTests {
     }
 
 
+
+
     @Test
     public void fetchAllTest(){
         List<User> users = userDao.findAll();

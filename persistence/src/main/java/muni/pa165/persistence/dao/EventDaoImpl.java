@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class EventDaoImpl implements  EventDao {
     @PersistenceContext
     private EntityManager entityManager;
+    private Time totalTime;
 
     public EventDaoImpl() { }
 
@@ -63,4 +65,16 @@ public class EventDaoImpl implements  EventDao {
         }
 
     }
+    @Override
+    public List<Event> getTodayEvent() {
+        LocalDate todayDate = LocalDate.now();
+        return this.entityManager.createQuery("select e from Event e where eventDate=:todayDate",Event.class).setParameter("eventDate",todayDate).getResultList();
+    }
+
+    @Override
+    public List<Event> calculateParticipantEventTimeToday(Long userId) {
+        LocalDate todayDate = LocalDate.now();
+        return this.entityManager.createQuery("select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(endTime) - UNIX_TIMESTAMP(startTime))) AS totalTime ,e from Event e where eventDate=:todayDate AND user=:userId").setParameter("eventDate",todayDate).setParameter("user",userId).getResultList();
+    }
+
 }

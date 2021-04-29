@@ -24,4 +24,8 @@ public interface EventDao {
     List<Event> findByName(String name) ;
 
     List<Event> findByRange(LocalDate startDate, Optional<LocalDate> endDate) ;
+
+    List<Event> getTodayEvent();
+
+    List<Event> calculateParticipantEventTimeToday(Long id);
 }
