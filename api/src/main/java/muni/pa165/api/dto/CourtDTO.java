@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class CourtDTO {
     private Long id;
     private LocalDateTime createdAt;
-    private UserType type;
+
 
     public String getName() {
         return name;
@@ -35,11 +35,5 @@ public class CourtDTO {
         this.createdAt = createdAt;
     }
 
-    public UserType getType() {
-        return type;
-    }
 
-    public void setType(UserType type) {
-        this.type = type;
-    }
 }
