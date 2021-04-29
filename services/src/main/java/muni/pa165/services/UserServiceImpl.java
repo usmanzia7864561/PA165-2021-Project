@@ -9,20 +9,34 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import javax.validation.ValidationException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * User service for registering user and other related functions
+ * @author Muhammad Abdullah
+ */
 @Service
 public class UserServiceImpl implements UserService {
     @Inject
     private UserDao userDao;
 
+    public UserServiceImpl() { }
+
     @Override
-    public void registerUser(User u, String unencryptedPassword) {
-        u.setPassword(createHash(unencryptedPassword));
-        userDao.create(u);
+    public User registerUser(User user) throws ValidationException {
+        if (user.getName().isBlank()) throw new ValidationException("Name is required");
+        if (user.getEmail().isBlank()) throw new ValidationException("Email is required");
+        if (userDao.findByEmail(user.getEmail()).isPresent()) throw new ValidationException("Email is already registered");
+        if (user.getPassword().isBlank() || user.getPassword().length() < 6) throw new ValidationException("Password should have at-least 6 characters");
+        if (user.getType() != UserType.MANAGER && user.getType() != UserType.TENNIS_USER) throw new ValidationException("User type is not valid");
+
+        user.setPassword(createHash(user.getPassword()));
+        userDao.create(user);
+        return user;
     }
 
     @Override
@@ -55,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //see  https://crackstation.net/hashing-security.htm#javasourcecode
-    private static String createHash(String password) {
+    public static String createHash(String password) {
         final int SALT_BYTE_SIZE = 24;
         final int HASH_BYTE_SIZE = 24;
         final int PBKDF2_ITERATIONS = 1000;

@@ -27,5 +27,5 @@ public interface EventDao {
 
     List<Event> getTodayEvent();
 
-    List<Event> calculateParticipantEventTimeToday(Long id);
+    <Optional>List calculateParticipantEventTimeToday(Long id);
 }

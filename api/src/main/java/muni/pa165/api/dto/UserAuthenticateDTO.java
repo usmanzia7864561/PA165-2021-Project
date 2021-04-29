@@ -1,18 +1,24 @@
 package muni.pa165.api.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+
 public class UserAuthenticateDTO
 {
-    private Long userId;
+    @Email
+    private Long email;
+
+    @Size(min = 6,max = 32)
     private String password;
 
-    public Long getUserId()
+    public Long getEmail()
     {
-        return userId;
+        return email;
     }
 
-    public void setUserId(Long userId)
+    public void setEmail(Long email)
     {
-        this.userId = userId;
+        this.email = email;
     }
 
     public String getPassword()
