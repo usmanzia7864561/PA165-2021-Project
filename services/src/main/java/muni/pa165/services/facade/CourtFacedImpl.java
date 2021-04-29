@@ -31,7 +31,7 @@ public class CourtFacedImpl implements CourtFacade {
     }
 
     @Override
-    public void registerCourt(CourtDTO c) {
+    public void createCourt(CourtDTO c) {
         Court courtEntity = beanMappingService.mapTo(c, Court.class);
         courtService.registerCourt(courtEntity);
         c.setId(courtEntity.getId());
