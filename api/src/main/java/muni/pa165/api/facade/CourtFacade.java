@@ -14,7 +14,7 @@ public interface CourtFacade {
     /**
      * Register Court
      */
-    void registerCourt(CourtDTO c);
+    void createCourt(CourtDTO c);
     /**
      * Get All court
      */

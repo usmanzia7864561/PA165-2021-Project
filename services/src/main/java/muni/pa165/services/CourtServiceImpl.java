@@ -12,13 +12,14 @@ public class CourtServiceImpl implements CourtService{
     private CourtDao courtDao;
     private String name;
 
+
     @Override
-    public void registerCourt(Court c) {
+    public void createCourt(Court c) {
         courtDao.create(c);
     }
 
     @Override
-    public List<Court> GetAllCourt() {return courtDao.findAll();}
+    public List<Court> getAllCourt() {return courtDao.findAll();}
 
     @Override
     public Optional<Court> findById(Long id) { return courtDao.findById(id); }

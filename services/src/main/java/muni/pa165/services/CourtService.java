@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Optional;
 public interface CourtService {
 
-    void registerCourt(Court c);
+    void createCourt(Court c);
 
     /**
      * Get all registered Court
      */
-    List<Court> GetAllCourt();
+    List<Court> getAllCourt();
 
 
     Optional<Court> findById(Long id);
