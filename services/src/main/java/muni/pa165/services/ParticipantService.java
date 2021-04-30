@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ParticipantService {
-    void create(Participant c);
+    Optional<Participant> create(Participant c);
 
     /**
      * Get all registered Participant

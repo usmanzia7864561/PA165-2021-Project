@@ -17,6 +17,13 @@ public class ParticipantFacadeImpl implements ParticipantFacade {
     @Inject
     private DozerConverter dozerConverter;
 
+    public ParticipantFacadeImpl() { }
+
+    public ParticipantFacadeImpl(ParticipantService ps, DozerConverter converter) {
+        participantService = ps;
+        dozerConverter = converter;
+    }
+
     @Override
     public Collection<ParticipantDTO> findByName(String name) {
         return dozerConverter.convert(participantService.findByName(name),ParticipantDTO.class);

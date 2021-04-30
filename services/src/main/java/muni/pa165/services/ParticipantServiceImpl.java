@@ -12,8 +12,8 @@ public class ParticipantServiceImpl implements ParticipantService {
     private ParticipantDao participantDao;
 
     @Override
-    public void create(Participant c) {
-        participantDao.create(c);
+    public Optional<Participant> create(Participant c) {
+        return participantDao.create(c);
     }
 
     @Override

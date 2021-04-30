@@ -16,7 +16,7 @@ public interface ParticipantDao {
      *
      * @param participant
      */
-    void create(Participant participant);
+    Optional<Participant> create(Participant participant);
 
     /**
      * Get all participants in the database
