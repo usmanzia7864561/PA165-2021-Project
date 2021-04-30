@@ -7,12 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class CourtServiceImpl implements CourtService{
-
     @Inject
     private CourtDao courtDao;
-
-
-
 
     @Override
     public void createCourt(Court c) {

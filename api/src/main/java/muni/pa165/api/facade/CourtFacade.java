@@ -3,7 +3,7 @@ import muni.pa165.api.dto.CourtDTO;
 
 import muni.pa165.persistence.entity.Court;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
 public interface CourtFacade {
@@ -20,7 +20,7 @@ public interface CourtFacade {
      * Get All court
      * @return
      */
-    List<Court> getAllCourtDTO();
+    Collection<CourtDTO> getAllCourtDTO();
     /**
      * Remove Court
      */

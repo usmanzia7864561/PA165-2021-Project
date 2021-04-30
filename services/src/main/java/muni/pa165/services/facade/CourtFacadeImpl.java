@@ -1,25 +1,22 @@
 package muni.pa165.services.facade;
 
 
-
-import muni.pa165.api.facade.CourtFacade;
 import muni.pa165.api.dto.CourtDTO;
+import muni.pa165.api.facade.CourtFacade;
 import muni.pa165.persistence.dao.CourtDao;
 import muni.pa165.persistence.entity.Court;
-
-import muni.pa165.services.converter.DozerConverter;
 import muni.pa165.services.CourtService;
+import muni.pa165.services.converter.DozerConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CourtFacedImpl implements CourtFacade {
-
+public class CourtFacadeImpl implements CourtFacade {
     @Autowired
     private CourtService courtService;
 
@@ -45,17 +42,15 @@ public class CourtFacedImpl implements CourtFacade {
 
     @Override
     public Collection<CourtDTO> getAllCourtDTO() {
-        List<CourtDTO> courtDTOS = dozerConverter.convert(courtService.findAll(), CourtDTO.class);
-        return courtDTOS;
+        List<CourtDTO> courtDTOS = dozerConverter.convert(courtService.getAllCourt(), CourtDTO.class);
+        return dozerConverter.convert(courtService.getAllCourt(), CourtDTO.class);
     }
 
 
 
     @Override
     public void remove(Court court) {
-
         courtService.remove(court);
-
     }
 
     @Override
