@@ -10,8 +10,9 @@ public interface EventService {
 
     /**
      * Add the event.
+     * @return
      */
-    void createEvent(Event event);
+    Event createEvent(Event event);
 
 
     /**
@@ -38,6 +39,6 @@ public interface EventService {
     /**
      * Check if the given user that access all the event is admin.
      */
-    boolean ParticipantAvailibility(Participant p);
+    boolean participantAvailability(Participant p);
 
 }

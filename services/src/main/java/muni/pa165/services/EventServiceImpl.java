@@ -15,9 +15,10 @@ public class EventServiceImpl  implements EventService {
     private EventDao eventDao;
 
     @Override
-    public void createEvent(Event event) {
+    public Event createEvent(Event event) {
 
         eventDao.create(event);
+        return event;
     }
 
 
@@ -42,7 +43,7 @@ public class EventServiceImpl  implements EventService {
     }
 
     @Override
-    public boolean ParticipantAvailibility(Participant p)
+    public boolean participantAvailability(Participant p)
     {
         List participantEventInfo = eventDao.calculateParticipantEventTimeToday(p.getId());
         Integer totalTime = Integer.parseInt(participantEventInfo.get(0).toString());
