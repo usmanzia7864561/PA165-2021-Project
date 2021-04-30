@@ -6,7 +6,7 @@ import muni.pa165.api.facade.CourtFacade;
 import muni.pa165.api.dto.CourtDTO;
 import muni.pa165.persistence.entity.Court;
 
-import muni.pa165.services.BeanMappingService;
+import muni.pa165.services.converter.DozerConverter;
 import muni.pa165.services.CourtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Collection;
@@ -20,26 +20,26 @@ public class CourtFacedImpl implements CourtFacade {
     private CourtService courtService;
 
     @Autowired
-    private BeanMappingService beanMappingService;
+    private DozerConverter dozerConverter;
 
     @Override
     public CourtDTO findByName(String name) {
 
        List<Court> court = courtService.findByName(name);
-       return court.isEmpty() ? null : beanMappingService.mapTo((Object) court, CourtDTO.class);
+       return court.isEmpty() ? null : dozerConverter.convert((Object) court, CourtDTO.class);
 
     }
 
     @Override
     public void registerCourt(CourtDTO c) {
-        Court courtEntity = beanMappingService.mapTo(c, Court.class);
+        Court courtEntity = dozerConverter.convert(c, Court.class);
         courtService.registerCourt(courtEntity);
         c.setId(courtEntity.getId());
     }
 
     @Override
     public Collection<CourtDTO> getAllCourtDTO() {
-        List<CourtDTO> courtDTOS = beanMappingService.mapTo(courtService.GetAllCourt(), CourtDTO.class);
+        List<CourtDTO> courtDTOS = dozerConverter.convert(courtService.GetAllCourt(), CourtDTO.class);
         return courtDTOS;
     }
 

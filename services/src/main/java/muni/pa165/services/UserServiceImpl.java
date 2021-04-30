@@ -3,6 +3,7 @@ package muni.pa165.services;
 import muni.pa165.persistence.dao.UserDao;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.UserType;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
@@ -27,10 +28,10 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl() { }
 
     @Override
-    public User registerUser(User user) throws ValidationException {
+    public User registerUser(User user) throws ValidationException, DataAccessException {
         if (user.getName().isBlank()) throw new ValidationException("Name is required");
         if (user.getEmail().isBlank()) throw new ValidationException("Email is required");
-        if (userDao.findByEmail(user.getEmail()).isPresent()) throw new ValidationException("Email is already registered");
+        if (this.findUserByEmail(user.getEmail()).isPresent()) throw new ValidationException("Email is already registered");
         if (user.getPassword().isBlank() || user.getPassword().length() < 6) throw new ValidationException("Password should have at-least 6 characters");
         if (user.getType() != UserType.MANAGER && user.getType() != UserType.TENNIS_USER) throw new ValidationException("User type is not valid");
 
