@@ -4,18 +4,27 @@ import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.EventType;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class EventDTO {
 
     private Long id;
     private String name;
     private String description;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private LocalDate eventDate;
     private EventType type;
     private User createdBy;
+
+    public EventDTO(String name, String description, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType type) {
+        this.name = name;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.eventDate = eventDate;
+        this.type = type;
+    }
 
     public String getName() {
         return name;
@@ -33,19 +42,19 @@ public class EventDTO {
         this.description = description;
     }
 
-    public LocalDateTime getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 

@@ -1,10 +1,10 @@
+package muni.pa165.services;
+
 import muni.pa165.persistence.dao.EventDao;
 import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.Participant;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.EventType;
-import muni.pa165.services.EventService;
-import muni.pa165.services.EventServiceImpl;
 import muni.pa165.services.config.ServiceConfig;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;

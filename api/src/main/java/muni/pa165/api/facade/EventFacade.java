@@ -18,6 +18,11 @@ public interface EventFacade {
      * Get today Event
      */
     Collection<EventDTO> getTodayEvents();
+
+    /**
+     * Create the new Event.
+     */
+    void createEvent(EventDTO u);
 }
 
 
