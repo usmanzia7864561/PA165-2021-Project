@@ -13,35 +13,40 @@ import java.util.List;
 import java.util.Optional;
 
 public class EventFacadeImpl implements EventFacade {
-
     @Autowired
     private EventService eventService;
 
     @Inject
     private DozerConverter dozerConverter;
 
-    @Override
-    public EventDTO findEventById(Long eventId) {
-        Optional<Event> event = eventService.getEventById(eventId);
-        return event.isEmpty() ? null : dozerConverter.convert((Object) event, EventDTO.class);
+    public EventFacadeImpl() {}
+
+    public EventFacadeImpl(EventService eventService, DozerConverter dozerConverter) {
+        this.eventService = eventService;
+        this.dozerConverter = dozerConverter;
     }
 
     @Override
-    public void createEvent(EventDTO u) {
-        Event eventEntity = dozerConverter.convert(u, Event.class);
-        eventService.createEvent(eventEntity);
+    public EventDTO findEventById(Long eventId) {
+        Optional<Event> event = eventService.getEventById(eventId);
+        return event.isEmpty() ? null : dozerConverter.convert(event, EventDTO.class);
+    }
+
+    @Override
+    public void createEvent(EventDTO eventDTO) {
+        eventService.createEvent(dozerConverter.convert(eventDTO, Event.class));
     }
 
     @Override
     public Collection<EventDTO> getAllEvents() {
-        List<Event> event = eventService.getAllEvents();
-        return event.isEmpty() ? null : dozerConverter.convert((Collection<?>) event, EventDTO.class);
+        List<Event> events = eventService.getAllEvents();
+        return dozerConverter.convert(events, EventDTO.class);
     }
 
     @Override
     public Collection<EventDTO> getTodayEvents() {
-        List<Event> event = eventService.getTodayEvents();
-        return event.isEmpty() ? null : dozerConverter.convert((Collection<?>) event, EventDTO.class);
+        List<Event> events = eventService.getTodayEvents();
+        return dozerConverter.convert(events, EventDTO.class);
     }
 
 }

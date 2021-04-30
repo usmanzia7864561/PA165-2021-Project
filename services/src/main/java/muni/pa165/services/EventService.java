@@ -12,7 +12,7 @@ public interface EventService {
      * Add the event.
      * @return
      */
-    Event createEvent(Event event);
+    Optional<Event> createEvent(Event event);
 
 
     /**

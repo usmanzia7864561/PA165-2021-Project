@@ -15,10 +15,8 @@ public class EventServiceImpl  implements EventService {
     private EventDao eventDao;
 
     @Override
-    public Event createEvent(Event event) {
-
-        eventDao.create(event);
-        return event;
+    public Optional<Event> createEvent(Event event) {
+        return eventDao.create(event);
     }
 
 
@@ -47,6 +45,6 @@ public class EventServiceImpl  implements EventService {
     {
         List participantEventInfo = eventDao.calculateParticipantEventTimeToday(p.getId());
         Integer totalTime = Integer.parseInt(participantEventInfo.get(0).toString());
-        return totalTime >2 ?false:true;
+        return totalTime <= 2;
     }
 }

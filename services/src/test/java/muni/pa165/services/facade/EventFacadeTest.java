@@ -2,31 +2,61 @@ package muni.pa165.services.facade;
 
 import muni.pa165.api.dto.EventDTO;
 import muni.pa165.api.facade.EventFacade;
+import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.enums.EventType;
+import muni.pa165.services.EventService;
 import muni.pa165.services.config.ServiceConfig;
+import muni.pa165.services.converter.DozerConverter;
+import muni.pa165.services.converter.DozerConverterImpl;
 import org.mockito.InjectMocks;
 import org.springframework.test.context.ContextConfiguration;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = ServiceConfig.class)
 public class EventFacadeTest {
     @InjectMocks
     private EventFacade eventFacade;
 
+    @Inject
+    private DozerConverter converter;
+
+    EventService eventService = mock(EventService.class);
+
+    EventDTO eventDTO = new EventDTO("Tennis Tournament","No Description",LocalTime.NOON,LocalTime.MIDNIGHT,LocalDate.now(),EventType.TOURNAMENT);
+    Event event;
+
     @BeforeClass
     public void setup(){
-        eventFacade = new EventFacadeImpl();
+        converter = new DozerConverterImpl();
+        event = converter.convert(eventDTO,Event.class);
+        eventFacade = new EventFacadeImpl(eventService,converter);
     }
 
-    @Ignore
+    @BeforeMethod
+    public void beforeMocks(){
+        when(eventService.createEvent(any())).thenReturn(Optional.of(event));
+        when(eventService.getAllEvents()).thenReturn(List.of(event));
+        when(eventService.getEventById(anyLong())).thenReturn(Optional.of(event));
+    }
+
     @Test
-    public void createEventTest(){
-        EventDTO event = new EventDTO("New Event","dddd",LocalTime.NOON,LocalTime.MIDNIGHT, LocalDate.now(), EventType.TOURNAMENT);
-        eventFacade.createEvent(event);
+    public void getAllEventTest(){
+        Collection<EventDTO> events = eventFacade.getAllEvents();
+        Assert.assertEquals(events.size(),1);
     }
 }

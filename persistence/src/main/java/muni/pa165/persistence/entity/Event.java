@@ -126,7 +126,7 @@ public class Event {
         if (this == o) return true;
         if (!(o instanceof Event)) return false;
         Event event = (Event) o;
-        return name.equals(event.name) && startTime.equals(event.startTime) && eventDate.equals(event.eventDate) && user.equals(event.user);
+        return name.equals(event.name) && startTime.equals(event.startTime) && eventDate.equals(event.eventDate);
     }
 
     @Override
