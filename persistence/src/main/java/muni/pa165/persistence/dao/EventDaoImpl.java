@@ -41,6 +41,7 @@ public class EventDaoImpl implements  EventDao {
         }
     }
 
+
     @Override
     public void remove(Event event) {
         this.entityManager.remove(event);
