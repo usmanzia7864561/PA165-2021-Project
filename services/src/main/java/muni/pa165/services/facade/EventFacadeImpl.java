@@ -26,6 +26,12 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
+    public void createEvent(EventDTO u) {
+        Event eventEntity = beanMappingService.mapTo(u, Event.class);
+        eventService.createEvent(eventEntity);
+    }
+
+    @Override
     public Collection<EventDTO> getAllEvents() {
         List<Event> event = eventService.getAllEvents();
         return event.isEmpty() ? null : beanMappingService.mapTo((Collection<?>) event, EventDTO.class);
