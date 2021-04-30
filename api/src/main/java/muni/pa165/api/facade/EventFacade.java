@@ -4,10 +4,13 @@ import muni.pa165.api.dto.EventDTO;
 
 import java.util.Collection;
 
+/**
+ * @author Usman Zia
+ */
 public interface EventFacade {
 
 
-    EventDTO findEventById(Long userId);
+    EventDTO findEventById(Long id);
 
     /**
      * Get all Event
@@ -22,7 +25,7 @@ public interface EventFacade {
     /**
      * Create the new Event.
      */
-    void createEvent(EventDTO u);
+    void createEvent(EventDTO eventDTO);
 }
 
 

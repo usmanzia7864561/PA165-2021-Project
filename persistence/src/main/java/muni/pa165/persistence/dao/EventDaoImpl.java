@@ -25,8 +25,9 @@ public class EventDaoImpl implements  EventDao {
     public EventDaoImpl() { }
 
     @Override
-    public void create(Event event) {
+    public Optional<Event> create(Event event) {
         this.entityManager.persist(event);
+        return this.findById(event.getId());
     }
 
     @Override

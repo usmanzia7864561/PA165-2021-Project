@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class EventDTO {
-
     private Long id;
     private String name;
     private String description;
@@ -16,6 +15,8 @@ public class EventDTO {
     private LocalDate eventDate;
     private EventType type;
     private User createdBy;
+
+    public EventDTO() { }
 
     public EventDTO(String name, String description, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType type) {
         this.name = name;

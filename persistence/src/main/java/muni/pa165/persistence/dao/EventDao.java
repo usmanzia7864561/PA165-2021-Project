@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 public interface EventDao {
 
-    void create(Event event);
+    Optional<Event> create(Event event);
 
     List<Event> findAll();
 
