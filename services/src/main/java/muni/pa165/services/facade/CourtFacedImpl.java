@@ -7,7 +7,7 @@ import muni.pa165.api.dto.CourtDTO;
 import muni.pa165.persistence.dao.CourtDao;
 import muni.pa165.persistence.entity.Court;
 
-import muni.pa165.services.BeanMappingService;
+import muni.pa165.services.converter.DozerConverter;
 import muni.pa165.services.CourtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,31 +27,26 @@ public class CourtFacedImpl implements CourtFacade {
     private CourtDao courtDao;
 
     @Autowired
-    private BeanMappingService beanMappingService;
+    private DozerConverter dozerConverter;
 
     @Override
-    public Object findByName(String name) {
 
-        try {
-            return courtDao.findByName(name);
-        }catch (NoResultException e){
-            return Optional.empty();
-        }
+    public CourtDTO findByName(String name) {
+       List<Court> court = courtService.findByName(name);
+       return court.isEmpty() ? null : dozerConverter.convert((Object) court, CourtDTO.class);
     }
 
     @Override
     public void createCourt(CourtDTO c) {
-        Court courtEntity = beanMappingService.mapTo(c, Court.class);
+        Court courtEntity = dozerConverter.convert(c, Court.class);
         courtService.createCourt(courtEntity);
         c.setId(courtEntity.getId());
     }
 
-
-
-
     @Override
-    public List<Court> getAllCourtDTO() {
-        return courtDao.findAll();
+    public Collection<CourtDTO> getAllCourtDTO() {
+        List<CourtDTO> courtDTOS = dozerConverter.convert(courtService.findAll(), CourtDTO.class);
+        return courtDTOS;
     }
 
 

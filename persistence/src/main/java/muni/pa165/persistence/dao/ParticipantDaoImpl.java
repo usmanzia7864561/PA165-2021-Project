@@ -1,6 +1,5 @@
 package muni.pa165.persistence.dao;
 
-import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.Participant;
 import org.springframework.stereotype.Repository;
 
@@ -24,8 +23,9 @@ public class ParticipantDaoImpl implements ParticipantDao {
     public ParticipantDaoImpl() { }
 
     @Override
-    public void create(Participant participant) {
+    public Optional<Participant> create(Participant participant) {
         this.entityManager.persist(participant);
+        return this.findById(participant.getId());
     }
 
     @Override
@@ -41,9 +41,6 @@ public class ParticipantDaoImpl implements ParticipantDao {
         }catch (NoResultException exception){
             return Optional.empty();
         }
-
-
-
     }
 
     @Override

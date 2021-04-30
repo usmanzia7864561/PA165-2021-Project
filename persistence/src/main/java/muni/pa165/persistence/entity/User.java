@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -37,7 +38,7 @@ public class User {
     private UserType type;
 
     @OneToMany(mappedBy = "user")
-    private Set<Event> events;
+    private Set<Event> events = new HashSet<>();
 
     public User(){ }
 

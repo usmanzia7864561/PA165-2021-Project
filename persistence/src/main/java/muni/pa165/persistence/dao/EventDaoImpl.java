@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,12 +20,14 @@ import java.util.Optional;
 public class EventDaoImpl implements  EventDao {
     @PersistenceContext
     private EntityManager entityManager;
+    private Object totalTime;
 
     public EventDaoImpl() { }
 
     @Override
-    public void create(Event event) {
+    public Optional<Event> create(Event event) {
         this.entityManager.persist(event);
+        return this.findById(event.getId());
     }
 
     @Override
@@ -41,6 +44,7 @@ public class EventDaoImpl implements  EventDao {
         }
     }
 
+
     @Override
     public void remove(Event event) {
         this.entityManager.remove(event);
@@ -50,4 +54,28 @@ public class EventDaoImpl implements  EventDao {
     public List<Event> findByName(String name) {
         return this.entityManager.createQuery("select e from Event e where name=:name",Event.class).setParameter("name",name).getResultList();
     }
+
+    @Override
+    public List<Event> findByRange(LocalDate startDate, Optional<LocalDate> endDate) {
+        if (endDate.isEmpty()){
+            return this.entityManager.createQuery("select e from Event e where startDate=:startDate",Event.class).setParameter("startDate",startDate).getResultList();
+        }else{
+            return this.entityManager.createQuery("select e from Event e where startDate BETWEEN :startDate AND :endDate",Event.class).
+                    setParameter("startDate",startDate)
+                    .setParameter("endDate",endDate.get()).getResultList();
+        }
+
+    }
+    @Override
+    public List<Event> getTodayEvent() {
+        LocalDate todayDate = LocalDate.now();
+        return this.entityManager.createQuery("select e from Event e where eventDate=:todayDate",Event.class).setParameter("eventDate",todayDate).getResultList();
+    }
+
+    @Override
+    public <Optional>List calculateParticipantEventTimeToday(Long userId) {
+        LocalDate todayDate = LocalDate.now();
+        return this.entityManager.createQuery("select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(e.endTime) - UNIX_TIMESTAMP(e.startTime))) AS totalTime from Event e where eventDate=:todayDate AND participants=:participant").setParameter("eventDate",todayDate).setParameter("participant",userId).getResultList();
+    }
+
 }
