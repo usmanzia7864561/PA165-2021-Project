@@ -48,7 +48,7 @@ public class Event {
     @ManyToOne
     private Court court;
 
-    @OneToMany
+    @ManyToMany
     @MapsId("event")
     private Set<Participant> participants = new HashSet<>();
 
@@ -96,7 +96,7 @@ public class Event {
     }
 
     public void addParticipant(Participant participant){
-        participant.setEvent(this);
+        participant.addEvent(this);
         this.participants.add(participant);
     }
 
@@ -106,8 +106,16 @@ public class Event {
 
     public void removeParticipant(Participant participant){
         this.participants.remove(participant);
+        participant.removeEvent(this);
     }
-
+/*
+    @PreRemove
+    public void removeParticipantsFromEvent(){
+        for (Participant participant:this.participants){
+            participant.removeEvent(this);
+        }
+    }
+*/
     @PreRemove
     public void removeEventFromCourt(){
         this.court.removeEvent(this);

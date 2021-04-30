@@ -1,6 +1,8 @@
 package muni.pa165.persistence.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Participant {
@@ -11,12 +13,10 @@ public class Participant {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    private Event event;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Event> events = new HashSet<>();
 
-    public Participant(){
-
-    }
+    public Participant() { }
 
     public Participant(String name) {
         this.name = name;
@@ -26,14 +26,11 @@ public class Participant {
         return id;
     }
 
-    public void setEvent(Event event){
-        this.event = event;
+    public void addEvent(Event event){
+        this.events.add(event);
     }
 
-    @PreRemove
-    public void removeParticipantFromEvent(){
-        this.event.removeParticipant(this);
-    }
+    public void removeEvent(Event event) { this.events.remove(event); }
 
     @Override
     public boolean equals(Object o) {
@@ -43,13 +40,13 @@ public class Participant {
         Participant that = (Participant) o;
 
         if (!name.equals(that.name)) return false;
-        return event.equals(that.event);
+        return events.equals(that.events);
     }
 
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + event.hashCode();
+        result = 31 * result + events.hashCode();
         return result;
     }
 
@@ -58,8 +55,6 @@ public class Participant {
         return "Participant{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", event=" + event.getName() +
-                ", event manager=" + event.getUser() +
                 '}';
     }
 }
