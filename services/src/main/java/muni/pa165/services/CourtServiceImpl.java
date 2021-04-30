@@ -10,7 +10,8 @@ public class CourtServiceImpl implements CourtService{
 
     @Inject
     private CourtDao courtDao;
-    private String name;
+
+
 
 
     @Override
@@ -27,9 +28,12 @@ public class CourtServiceImpl implements CourtService{
     @Override
     public void remove(Court court) { courtDao.remove(court); }
 
+
     @Override
     public List<Court> findByName(String name) {
-        this.name = name;
+
         return courtDao.findByName(name);
     }
+
+
 }

@@ -25,4 +25,5 @@ public interface CourtService {
     List<Court> findByName(String name);
 
 
+  //  Object GetAllCourt();
 }

@@ -3,22 +3,24 @@ import muni.pa165.api.dto.CourtDTO;
 
 import muni.pa165.persistence.entity.Court;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface CourtFacade {
     /**
      * Find Court By Name
+     * @return
      */
-    CourtDTO findByName(String name);
+    Object findByName(String name);
     /**
      * Register Court
      */
     void createCourt(CourtDTO c);
     /**
      * Get All court
+     * @return
      */
-    Collection<CourtDTO> getAllCourtDTO();
+    List<Court> getAllCourtDTO();
     /**
      * Remove Court
      */
