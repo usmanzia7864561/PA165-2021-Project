@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import javax.validation.ValidationException;
@@ -47,6 +48,7 @@ public class UserServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @Ignore
     @Test
     public void registerUser(){
         manager = userService.registerUser(getManager());

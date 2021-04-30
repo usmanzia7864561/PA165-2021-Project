@@ -28,7 +28,7 @@ public interface UserFacade {
     /**
      * Register the given user with the given unencrypted password.
      */
-    void registerUser(UserDTO u);
+    UserDTO registerUser(UserDTO u);
 
     /**
      * Get all registered users

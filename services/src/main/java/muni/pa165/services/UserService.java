@@ -1,6 +1,7 @@
 package muni.pa165.services;
 
 import muni.pa165.persistence.entity.User;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ValidationException;
@@ -16,9 +17,9 @@ import java.util.Optional;
 public interface UserService {
     /**
      * Register the given user with the given unencrypted password.
-     * @return
+     * @return User
      */
-    User registerUser(User u) throws ValidationException;
+    User registerUser(User u) throws ValidationException, DataAccessException;
 
     /**
      * Get all registered users

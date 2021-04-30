@@ -6,17 +6,26 @@ import javax.validation.constraints.Size;
 public class UserAuthenticateDTO
 {
     @Email
-    private Long email;
+    private String email;
 
     @Size(min = 6,max = 32)
     private String password;
 
-    public Long getEmail()
+    public UserAuthenticateDTO(){
+
+    }
+
+    public UserAuthenticateDTO(String email,String password){
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getEmail()
     {
         return email;
     }
 
-    public void setEmail(Long email)
+    public void setEmail(String email)
     {
         this.email = email;
     }
