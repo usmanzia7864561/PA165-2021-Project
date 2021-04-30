@@ -2,6 +2,7 @@ package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.Event;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,4 +22,10 @@ public interface EventDao {
     void remove(Event event);
 
     List<Event> findByName(String name) ;
+
+    List<Event> findByRange(LocalDate startDate, Optional<LocalDate> endDate) ;
+
+    List<Event> getTodayEvent();
+
+    <Optional>List calculateParticipantEventTimeToday(Long id);
 }
