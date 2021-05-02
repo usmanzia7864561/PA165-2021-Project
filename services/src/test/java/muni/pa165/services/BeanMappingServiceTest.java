@@ -31,7 +31,6 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
     @BeforeMethod
     public void createUsers(){
 		User manager = new User("Robert","robert@email.com","123456", UserType.MANAGER);
-
 		users.add(manager);
     }
     

@@ -7,18 +7,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class CourtServiceImpl implements CourtService{
-
     @Inject
     private CourtDao courtDao;
-    private String name;
 
     @Override
-    public void registerCourt(Court c) {
+    public void createCourt(Court c) {
         courtDao.create(c);
     }
 
     @Override
-    public List<Court> GetAllCourt() {return courtDao.findAll();}
+    public List<Court> getAllCourt() {return courtDao.findAll();}
 
     @Override
     public Optional<Court> findById(Long id) { return courtDao.findById(id); }
@@ -26,9 +24,12 @@ public class CourtServiceImpl implements CourtService{
     @Override
     public void remove(Court court) { courtDao.remove(court); }
 
+
     @Override
     public List<Court> findByName(String name) {
-        this.name = name;
+
         return courtDao.findByName(name);
     }
+
+
 }

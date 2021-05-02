@@ -1,17 +1,20 @@
 package muni.pa165.services;
 
 import muni.pa165.persistence.entity.Court;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+@Service
 public interface CourtService {
 
-    void registerCourt(Court c);
+    void createCourt(Court c);
 
     /**
      * Get all registered Court
      */
-    List<Court> GetAllCourt();
+    List<Court> getAllCourt();
 
 
     Optional<Court> findById(Long id);
@@ -25,4 +28,5 @@ public interface CourtService {
     List<Court> findByName(String name);
 
 
+  //  Object GetAllCourt();
 }

@@ -1,13 +1,18 @@
 package muni.pa165.api.dto;
 
-import muni.pa165.persistence.enums.UserType;
-
 import java.time.LocalDateTime;
 
 public class CourtDTO {
     private Long id;
     private LocalDateTime createdAt;
-    private UserType type;
+
+    public CourtDTO() {
+    }
+
+    public CourtDTO(LocalDateTime createdAt, String name) {
+        this.createdAt = createdAt;
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -35,11 +40,5 @@ public class CourtDTO {
         this.createdAt = createdAt;
     }
 
-    public UserType getType() {
-        return type;
-    }
 
-    public void setType(UserType type) {
-        this.type = type;
-    }
 }

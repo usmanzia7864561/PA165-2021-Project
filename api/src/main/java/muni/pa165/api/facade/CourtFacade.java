@@ -9,14 +9,16 @@ import java.util.Optional;
 public interface CourtFacade {
     /**
      * Find Court By Name
+     * @return
      */
-    CourtDTO findByName(String name);
+    Object findByName(String name);
     /**
      * Register Court
      */
-    void registerCourt(CourtDTO c);
+    void createCourt(CourtDTO c);
     /**
      * Get All court
+     * @return
      */
     Collection<CourtDTO> getAllCourtDTO();
     /**
