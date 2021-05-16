@@ -24,6 +24,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Testing User facade
+ * @author Muhammad Usman
+ */
 @ContextConfiguration(classes = ServiceConfig.class)
 public class UserFacadeTest {
     @Inject

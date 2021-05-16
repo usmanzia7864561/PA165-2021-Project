@@ -21,6 +21,10 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
+/**
+ * Testing user service
+ * @author Muhammad Abdullah
+ */
 @ContextConfiguration(classes = ServiceConfig.class)
 public class UserServiceTest {
     @Mock

@@ -17,6 +17,10 @@ import java.util.Optional;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
+/**
+ * Testing Participant service
+ * @author Muhammad Usman
+ */
 public class ParticipantServiceTest {
     @Mock
     private ParticipantDao participantDao;

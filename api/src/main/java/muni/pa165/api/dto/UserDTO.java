@@ -8,6 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
+/**
+ * @author Muhammad Abdullah
+ */
 public class UserDTO {
     private Long id;
 
