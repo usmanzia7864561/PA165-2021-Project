@@ -14,9 +14,7 @@ public class UserAuthenticateDTO
     @Size(min = 6,max = 32)
     private String password;
 
-    public UserAuthenticateDTO(){
-
-    }
+    public UserAuthenticateDTO(){ }
 
     public UserAuthenticateDTO(String email,String password){
         this.email = email;

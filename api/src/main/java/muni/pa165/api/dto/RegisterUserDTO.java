@@ -1,23 +1,12 @@
 package muni.pa165.api.dto;
 
-public class LoginDTO {
+/**
+ * @author Muhammad Abdullah
+ */
+public class RegisterUserDTO {
     String email;
 
-    String passowrd;
+    String password;
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassowrd() {
-        return passowrd;
-    }
-
-    public void setPassowrd(String passowrd) {
-        this.passowrd = passowrd;
-    }
 }
