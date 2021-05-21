@@ -1,26 +1,24 @@
 package muni.pa165.rest.controllers;
 
-import muni.pa165.api.facade.UserFacade;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import muni.pa165.api.dto.UserAuthenticateDTO;
+import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
-
-@Controller
-@RequestMapping(path = "/auth")
+@RestController
+@RequestMapping("/auth")
 public class AuthController {
-    @Inject
-    UserFacade userFacade;
-
-    @GetMapping(value = "/login", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String index(){
-        return "hello world";
+    @GetMapping(value = "/")
+    public @ResponseBody String index(){
+        return "index";
     }
 
-    @GetMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String login(){
+
+    @GetMapping(value = "/login")
+    public @ResponseBody String login(@RequestBody UserAuthenticateDTO userAuthenticateDTO){
+        return "Not avail";
+    }
+
+    @GetMapping(value = "/register")
+    public @ResponseBody String register(){
         return "hello world";
     }
 }

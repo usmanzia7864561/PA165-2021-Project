@@ -44,7 +44,7 @@
         </dependency>
     </dependencies>
 
-    <build>
+   <!--<build>
         <defaultGoal>cargo:run</defaultGoal>
         <finalName>rest</finalName>
         <plugins>
@@ -64,5 +64,5 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>
