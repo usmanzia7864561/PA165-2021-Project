@@ -1,13 +1,14 @@
 package muni.pa165.api.dto;
 
-import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.enums.UserType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
+/**
+ * @author Muhammad Abdullah
+ */
 public class UserDTO {
     private Long id;
 
@@ -18,19 +19,17 @@ public class UserDTO {
     private String email;
 
     @Size(min = 6,max = 32)
-    private String passwordHash;
+    private String password;
 
     @NotBlank
     private UserType type;
 
-    private Set<Event> events;
-
     public UserDTO() { }
 
-    public UserDTO(String name, String email, String passwordHash, UserType type) {
+    public UserDTO(String name, String email, String password, UserType type) {
         this.name = name;
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.password = password;
         this.type = type;
     }
 
@@ -42,12 +41,20 @@ public class UserDTO {
         this.id = id;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getName() {
+        return name;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -64,18 +71,6 @@ public class UserDTO {
 
     public void setType(UserType type) {
         this.type = type;
-    }
-
-    public Set<Event> getEvents() {
-        return events;
-    }
-
-    public void addEvent(Event event) {
-        this.events.add(event);
-    }
-
-    public void setEvents(Set<Event> events) {
-        this.events = events;
     }
 
     @Override
@@ -103,9 +98,10 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" +
                 "id=" + id +
-                ", passwordHash='" + passwordHash + '\'' +
+                ", passwordHash='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", givenName='" + type + '\'' +
                 '}';
     }
+
 }

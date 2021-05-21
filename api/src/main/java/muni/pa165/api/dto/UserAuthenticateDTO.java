@@ -3,6 +3,9 @@ package muni.pa165.api.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
+/**
+ * @author Muhammad Abdullah
+ */
 public class UserAuthenticateDTO
 {
     @Email
@@ -11,9 +14,7 @@ public class UserAuthenticateDTO
     @Size(min = 6,max = 32)
     private String password;
 
-    public UserAuthenticateDTO(){
-
-    }
+    public UserAuthenticateDTO(){ }
 
     public UserAuthenticateDTO(String email,String password){
         this.email = email;
