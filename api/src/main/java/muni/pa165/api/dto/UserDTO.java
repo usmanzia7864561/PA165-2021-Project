@@ -100,7 +100,8 @@ public class UserDTO {
                 "id=" + id +
                 ", passwordHash='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", givenName='" + type + '\'' +
+                ", givenName='" + name + '\'' +
+                ", type='" + type + '\'' +
                 '}';
     }
 

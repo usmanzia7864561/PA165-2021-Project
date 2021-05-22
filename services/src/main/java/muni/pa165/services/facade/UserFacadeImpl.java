@@ -7,6 +7,7 @@ import muni.pa165.persistence.entity.User;
 import muni.pa165.services.converter.DozerConverter;
 import muni.pa165.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -16,14 +17,14 @@ import java.util.Optional;
  * Implementation of UserFacade interface
  * @author Muhammad Abdullah
  */
+
+@Service
 public class UserFacadeImpl implements UserFacade {
     @Autowired
     private UserService userService;
 
     @Inject
     private DozerConverter dozerConverter;
-
-    public UserFacadeImpl(){}
 
     public UserFacadeImpl(UserService service,DozerConverter converter){
         userService = service;
@@ -33,13 +34,13 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public UserDTO findUserById(Long userId) {
         Optional<User> user = userService.findUserById(userId);
-        return user.isEmpty() ? null : dozerConverter.convert(user, UserDTO.class);
+        return dozerConverter.convert(user, UserDTO.class);
     }
 
     @Override
     public UserDTO findUserByEmail(String email) {
         Optional<User> user = userService.findUserByEmail(email);
-        return user.isEmpty() ? null : dozerConverter.convert(user, UserDTO.class);
+        return dozerConverter.convert(user, UserDTO.class);
     }
 
     @Override

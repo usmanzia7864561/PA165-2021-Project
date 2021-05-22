@@ -12,6 +12,7 @@
     <artifactId>api</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>muni.pa165</groupId>
             <artifactId>persistence</artifactId>
