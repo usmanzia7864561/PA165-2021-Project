@@ -46,8 +46,8 @@ public class AuthFilter  extends WebSecurityConfigurerAdapter {
                 throw new UsernameNotFoundException("not a valid user");
             }
 
-            Roles roles = userDTO.getType()== UserType.MANAGER?new Roles(Roles.MANAGER):new Roles(Roles.TENNIS_USER);
-            return new User(userDTO.getEmail(),userDTO.getEmail(), List.of(roles));
+            List<Roles> roles = userDTO.getType() == UserType.MANAGER? List.of(new Roles(Roles.MANAGER),new Roles(Roles.TENNIS_USER)):List.of(new Roles(Roles.TENNIS_USER));
+            return new User(userDTO.getEmail(), userDTO.getPassword(), roles);
         });
     }
 
@@ -80,7 +80,6 @@ public class AuthFilter  extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     @Override
     @Bean

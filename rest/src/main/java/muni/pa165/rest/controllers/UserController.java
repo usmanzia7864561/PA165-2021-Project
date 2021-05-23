@@ -3,12 +3,14 @@ package muni.pa165.rest.controllers;
 import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.api.dto.UserUpdateDTO;
 import muni.pa165.api.facade.UserFacade;
+import muni.pa165.rest.config.Roles;
 import muni.pa165.rest.models.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.Collection;
 
 @RestController
@@ -33,6 +35,7 @@ public class UserController {
         return userFacade.update(id, userDTO);
     }
 
+    @RolesAllowed(Roles.MANAGER)
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> delete(@PathVariable long id){
         if (userFacade.delete(id)){

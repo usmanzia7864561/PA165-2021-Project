@@ -62,7 +62,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return Optional.empty();
+        return Optional.ofNullable(this.entityManager.createQuery("select u from User u where email=:email", User.class).setParameter("email", email).getSingleResult());
     }
 
     @Override

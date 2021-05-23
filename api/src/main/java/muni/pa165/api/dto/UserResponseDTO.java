@@ -16,17 +16,22 @@ public class UserResponseDTO {
     private String email;
 
     @NotBlank
+    private String password;
+
+    @NotBlank
     private UserType type;
+
 
     private String createdAt;
 
     public UserResponseDTO() { }
 
-    public UserResponseDTO(Long id, String name, String email, UserType type) {
+    public UserResponseDTO(Long id, String name, String email,String password, UserType type) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.type = type;
+        this.password = password;
     }
 
     public UserResponseDTO(String name, String email, UserType type) {
@@ -73,6 +78,14 @@ public class UserResponseDTO {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
