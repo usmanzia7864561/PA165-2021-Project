@@ -83,6 +83,8 @@ public class Event {
         this.user = user;
     }
 
+
+
     public User getUser() {
         return user;
     }
@@ -130,6 +132,7 @@ public class Event {
     }
 
     public void setEventDate(String eventDate) {
+        System.out.println("eventdate"+eventDate);
         this.eventDate = LocalDate.parse(eventDate);
     }
 
