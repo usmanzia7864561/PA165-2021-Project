@@ -2,6 +2,7 @@ package muni.pa165.rest.controllers;
 
 import muni.pa165.api.dto.UserAuthenticateDTO;
 import muni.pa165.api.dto.UserDTO;
+import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.api.facade.UserFacade;
 import muni.pa165.rest.config.JwtTokenUtil;
 import muni.pa165.rest.models.GenericResponse;
@@ -41,7 +42,7 @@ public class AuthController {
             );
             Authentication authenticate = authenticationManager.authenticate(authenticationToken);
 
-            UserDTO user = userFacade.findUserByEmail(userAuthenticateDTO.getEmail());
+            UserResponseDTO user = userFacade.findUserByEmail(userAuthenticateDTO.getEmail());
             String token = new JwtTokenUtil().generateToken(user);
 
             return ResponseEntity.ok(new JWTResponse(token));
@@ -62,7 +63,7 @@ public class AuthController {
         final String token = authToken.substring("Bearer ".length());
         String email = jwtTokenUtil.getEmailFromToken(token);
 
-        UserDTO user = userFacade.findUserByEmail(email);
+        UserResponseDTO user = userFacade.findUserByEmail(email);
         if (user.getEmail().equals(email)) {
             String newToken = new JwtTokenUtil().generateToken(user);
             return ResponseEntity.ok(new JWTResponse(newToken));

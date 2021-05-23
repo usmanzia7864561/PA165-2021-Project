@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-
 /**
  * Event entity
  *
@@ -49,7 +48,7 @@ public class Event {
     @ManyToOne
     private Court court;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event",cascade = CascadeType.ALL)
     private Set<Participant> participants = new HashSet<>();
 
     public Event() { }

@@ -1,8 +1,6 @@
 package muni.pa165.api.facade;
 
-import muni.pa165.api.dto.UserAuthDTO;
-import muni.pa165.api.dto.UserAuthenticateDTO;
-import muni.pa165.api.dto.UserDTO;
+import muni.pa165.api.dto.*;
 
 import java.util.Collection;
 
@@ -17,14 +15,14 @@ public interface UserFacade {
      * @param userId
      * @return
      */
-    UserDTO findUserById(Long userId);
+    UserResponseDTO findUserById(Long userId);
 
     /**
      * Find a user by it's email
      * @param email
      * @return
      */
-    UserDTO findUserByEmail(String email);
+    UserResponseDTO findUserByEmail(String email);
 
     /**
      * Register the given user with the given unencrypted password.
@@ -34,7 +32,7 @@ public interface UserFacade {
     /**
      * Get all registered users
      */
-    Collection<UserDTO> getAllUsers();
+    Collection<UserResponseDTO> getAllUsers();
 
     /**
      * Try to authenticate a user. Return true only if the hashed password matches the records.
@@ -50,4 +48,6 @@ public interface UserFacade {
      * Check if the given user is admin.
      */
     boolean isManager(UserDTO u);
+
+    UserResponseDTO update(long id, UserUpdateDTO userUpdateDTO);
 }
