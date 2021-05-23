@@ -50,10 +50,9 @@ public class JWTFilter  extends OncePerRequestFilter {
         UserDetails userDetails = null;
 
         if (!userDTO.getEmail().isEmpty()){
-            Roles roles = userDTO.getType()==UserType.MANAGER?new Roles(Roles.MANAGER):new Roles(Roles.TENNIS_USER);
-            userDetails = new User(userDTO.getEmail(),userDTO.getEmail(),List.of(roles));
+            List<Roles> roles = userDTO.getType() == UserType.MANAGER ?  List.of(new Roles(Roles.MANAGER),new Roles(Roles.TENNIS_USER)) : List.of(new Roles(Roles.TENNIS_USER));
+            userDetails = new User(userDTO.getEmail(),userDTO.getPassword(), roles);
         }
-
 
         UsernamePasswordAuthenticationToken authentication =
                 new UsernamePasswordAuthenticationToken(

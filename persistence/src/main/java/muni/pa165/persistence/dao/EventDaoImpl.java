@@ -1,11 +1,13 @@
 package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.Event;
+import muni.pa165.persistence.entity.Participant;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +19,7 @@ import java.util.Optional;
  * @author Usman Zia
  */
 @Repository
+@Transactional
 public class EventDaoImpl implements  EventDao {
     @PersistenceContext
     private EntityManager entityManager;
@@ -76,6 +79,18 @@ public class EventDaoImpl implements  EventDao {
     public <Optional>List calculateParticipantEventTimeToday(Long userId) {
         LocalDate todayDate = LocalDate.now();
         return this.entityManager.createQuery("select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(e.endTime) - UNIX_TIMESTAMP(e.startTime))) AS totalTime from Event e where eventDate=:todayDate AND participants=:participant").setParameter("eventDate",todayDate).setParameter("participant",userId).getResultList();
+    }
+
+    @Override
+    public List<Event> findAllByCourt(long id) {
+        return this.entityManager.createQuery("select e from Event e where court_id=:courtId", Event.class).setParameter("courtId",id).getResultList();
+    }
+
+    @Override
+    public Participant addParticipant(long eventId, Participant participant) {
+        Optional<Event> event = this.findById(eventId);
+        event.ifPresent(value -> value.addParticipant(participant));
+        return participant;
     }
 
 }

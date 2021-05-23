@@ -1,5 +1,6 @@
 package muni.pa165.services;
 
+import muni.pa165.api.dto.ParticipantDTO;
 import muni.pa165.persistence.dao.EventDao;
 import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.Participant;
@@ -48,5 +49,15 @@ public class EventServiceImpl  implements EventService {
         List participantEventInfo = eventDao.calculateParticipantEventTimeToday(p.getId());
         Integer totalTime = Integer.parseInt(participantEventInfo.get(0).toString());
         return totalTime <= 2;
+    }
+
+    @Override
+    public List<Event> getAllCourtEvents(long id) {
+        return eventDao.findAllByCourt(id);
+    }
+
+    @Override
+    public Participant addParticipant(long eventId, Participant participant) {
+        return eventDao.addParticipant(eventId,participant);
     }
 }

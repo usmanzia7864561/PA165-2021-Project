@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import java.util.Optional;
  */
 
 @Repository
+@Transactional
 public class UserDaoImpl implements UserDao{
     @PersistenceContext
     private EntityManager entityManager;
@@ -60,12 +62,18 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return Optional.empty();
+        return Optional.ofNullable(this.entityManager.createQuery("select u from User u where email=:email", User.class).setParameter("email", email).getSingleResult());
     }
 
     @Override
-    public User update(long id, User user) {
-
-        return this.entityManager.createQuery("",User.class).getSingleResult();
+    public Optional<User> update(long id, User user) {
+        Optional<User> u = this.findById(id);
+        if (u.isPresent()){
+            u.get().setPassword(user.getPassword());
+            u.get().setName(user.getName());
+            u.get().setType(user.getType());
+            this.entityManager.merge(u.get());
+        }
+        return this.findById(id);
     }
 }

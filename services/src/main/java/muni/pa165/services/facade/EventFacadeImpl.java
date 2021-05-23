@@ -1,8 +1,10 @@
 package muni.pa165.services.facade;
 
 import muni.pa165.api.dto.EventDTO;
+import muni.pa165.api.dto.ParticipantDTO;
 import muni.pa165.api.facade.EventFacade;
 import muni.pa165.persistence.entity.Event;
+import muni.pa165.persistence.entity.Participant;
 import muni.pa165.services.EventService;
 import muni.pa165.services.converter.DozerConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,8 @@ public class EventFacadeImpl implements EventFacade {
     @Inject
     private DozerConverter dozerConverter;
 
-    public EventFacadeImpl() {}
+    public EventFacadeImpl() {
+    }
 
     public EventFacadeImpl(EventService eventService, DozerConverter dozerConverter) {
         this.eventService = eventService;
@@ -31,7 +34,7 @@ public class EventFacadeImpl implements EventFacade {
     @Override
     public EventDTO findEventById(Long eventId) {
         Optional<Event> event = eventService.getEventById(eventId);
-        return event.isEmpty() ? null : dozerConverter.convert(event, EventDTO.class);
+        return event.map(value -> dozerConverter.convert(value, EventDTO.class)).orElse(null);
     }
 
     @Override
@@ -44,10 +47,29 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
+    public ParticipantDTO addParticipant(long eventId, ParticipantDTO participantDTO) {
+        Participant participant = eventService.addParticipant(eventId, dozerConverter.convert(participantDTO, Participant.class));
+        return dozerConverter.convert(participant, ParticipantDTO.class);
+    }
+
+    @Override
+    public boolean remove(long id) {
+        Optional<Event> event = eventService.getEventById(id);
+        return event.map(value -> {
+            eventService.removeEvent(value);
+            return true;
+        }).orElse(false);
+    }
+
+    @Override
     public Collection<EventDTO> getAllEvents() {
         List<Event> events = eventService.getAllEvents();
-        List<EventDTO> ev = dozerConverter.convert(events, EventDTO.class);
+        return dozerConverter.convert(events, EventDTO.class);
+    }
 
+    @Override
+    public Collection<EventDTO> getAllCourtEvents(long id) {
+        List<Event> events = eventService.getAllCourtEvents(id);
         return dozerConverter.convert(events, EventDTO.class);
     }
 

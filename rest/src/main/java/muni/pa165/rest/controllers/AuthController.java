@@ -32,30 +32,31 @@ public class AuthController {
     JwtTokenUtil jwtTokenUtil;
 
     @PostMapping(value = "/login")
-    public ResponseEntity<?> login(UserAuthenticateDTO userAuthenticateDTO) {
+    public ResponseEntity<?> login(@RequestBody UserAuthenticateDTO userAuthenticateDTO) {
         try {
+            System.out.println("userFacade.authenticate(userAuthenticateDTO) " + userFacade.authenticate(userAuthenticateDTO));
             if (!userFacade.authenticate(userAuthenticateDTO)) {
                 throw new BadCredentialsException("Email or password invalid");
             }
+            UserResponseDTO user = userFacade.findUserByEmail(userAuthenticateDTO.getEmail());
+
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     userAuthenticateDTO.getEmail(), userAuthenticateDTO.getPassword()
             );
             Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-
-            UserResponseDTO user = userFacade.findUserByEmail(userAuthenticateDTO.getEmail());
             String token = new JwtTokenUtil().generateToken(user);
 
-            return ResponseEntity.ok(new JWTResponse(token));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new GenericResponse("Not a valid user"));
+            return ResponseEntity.ok(new JWTResponse(token, user));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new GenericResponse(e.getMessage()));
         }
     }
 
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
         UserDTO user = userFacade.registerUser(userDTO);
         return ResponseEntity.ok(user);
-    }
+    }*/
 
     @GetMapping(value = "/refresh", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> refreshToken(HttpServletRequest request) {
@@ -66,7 +67,7 @@ public class AuthController {
         UserResponseDTO user = userFacade.findUserByEmail(email);
         if (user.getEmail().equals(email)) {
             String newToken = new JwtTokenUtil().generateToken(user);
-            return ResponseEntity.ok(new JWTResponse(newToken));
+            return ResponseEntity.ok(new JWTResponse(newToken,user));
         }
 
         return ResponseEntity.badRequest().body("invalid info provided");

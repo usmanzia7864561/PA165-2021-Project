@@ -49,5 +49,5 @@ public interface UserFacade {
      */
     boolean isManager(UserDTO u);
 
-    UserResponseDTO update(long id, UserUpdateDTO userUpdateDTO);
+    UserUpdateDTO update(long id, UserUpdateDTO userUpdateDTO);
 }

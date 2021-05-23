@@ -1,6 +1,5 @@
 package muni.pa165.rest.controllers;
 
-import muni.pa165.api.dto.UserDTO;
 import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.api.dto.UserUpdateDTO;
 import muni.pa165.api.facade.UserFacade;
@@ -15,6 +14,7 @@ import javax.annotation.security.RolesAllowed;
 import java.util.Collection;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/user")
 public class UserController {
     @Autowired
@@ -31,10 +31,11 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserResponseDTO update(@PathVariable long id, @RequestBody UserUpdateDTO userDTO){
+    public UserUpdateDTO update(@PathVariable long id, @RequestBody UserUpdateDTO userDTO){
         return userFacade.update(id, userDTO);
     }
 
+    @RolesAllowed(Roles.MANAGER)
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> delete(@PathVariable long id){
         if (userFacade.delete(id)){

@@ -6,10 +6,13 @@ import muni.pa165.persistence.entity.Participant;
 import muni.pa165.services.ParticipantService;
 import muni.pa165.services.converter.DozerConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.List;
 
+@Service
 public class ParticipantFacadeImpl implements ParticipantFacade {
     @Autowired
     private ParticipantService participantService;
@@ -30,12 +33,13 @@ public class ParticipantFacadeImpl implements ParticipantFacade {
     }
 
     @Override
-    public void createParticipant(ParticipantDTO participantDTO) {
-        participantService.create(dozerConverter.convert(participantDTO, Participant.class));
+    public ParticipantDTO createParticipant(ParticipantDTO c) {
+        return null;
     }
 
     @Override
-    public Collection<ParticipantDTO> getAllParticipants() {
+    public List<ParticipantDTO> getAllParticipants() {
+        System.out.println("ALl participantService.getAllParticipants() " + participantService.getAllParticipants());
         return dozerConverter.convert(participantService.getAllParticipants(),ParticipantDTO.class);
     }
 
@@ -47,5 +51,11 @@ public class ParticipantFacadeImpl implements ParticipantFacade {
     @Override
     public ParticipantDTO findById(Long id) {
         return dozerConverter.convert(participantService.findById(id),ParticipantDTO.class);
+    }
+
+    @Override
+    public List<ParticipantDTO> getByEventParticipants(long eventId) {
+        List<Participant> participants = participantService.getByEventParticipants(eventId);
+        return dozerConverter.convert(participants, ParticipantDTO.class);
     }
 }

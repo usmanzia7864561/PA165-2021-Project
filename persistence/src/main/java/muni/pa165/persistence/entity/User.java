@@ -19,7 +19,7 @@ import java.util.Set;
 @Table(name = "Users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -105,8 +105,8 @@ public class User {
         this.email = email;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = LocalDateTime.parse(createdAt);
     }
 
     public void setType(UserType type) {
@@ -117,8 +117,8 @@ public class User {
         this.events = events;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
+    public String getCreatedAt() {
+        return this.createdAt.toString();
     }
 
     public UserType getType() {

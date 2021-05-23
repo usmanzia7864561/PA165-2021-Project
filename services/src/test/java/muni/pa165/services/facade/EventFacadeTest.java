@@ -22,6 +22,7 @@ import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -38,7 +39,7 @@ public class EventFacadeTest {
 
     EventService eventService = mock(EventService.class);
 
-    EventDTO eventDTO = new EventDTO("Tennis Tournament","No Description",LocalTime.NOON,LocalTime.MIDNIGHT,LocalDate.now(),EventType.TOURNAMENT);
+    EventDTO eventDTO = new EventDTO("Tennis Tournament","No Description",LocalTime.NOON.toString(),LocalTime.MIDNIGHT.toString(),LocalDate.now().toString(),EventType.TOURNAMENT, Set.of());
     Event event;
 
     @Ignore

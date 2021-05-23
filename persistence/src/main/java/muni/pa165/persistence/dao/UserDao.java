@@ -30,5 +30,5 @@ public interface UserDao {
 
     Optional<User> findByEmail(String email) ;
 
-    User update(long id, User user);
+    Optional<User> update(long id, User user);
 }

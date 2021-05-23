@@ -1,6 +1,7 @@
 package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.Event;
+import muni.pa165.persistence.entity.Participant;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -30,4 +31,8 @@ public interface EventDao {
     List<Event> getTodayEvent();
 
     <Optional>List calculateParticipantEventTimeToday(Long id);
+
+    List<Event> findAllByCourt(long id);
+
+    Participant addParticipant(long eventId, Participant participant);
 }

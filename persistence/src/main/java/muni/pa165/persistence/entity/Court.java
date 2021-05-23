@@ -4,6 +4,7 @@ import net.bytebuddy.implementation.bind.annotation.Default;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -32,19 +33,22 @@ public class Court {
     @Column(nullable = false , columnDefinition = "boolean default false")
     private Boolean isAvailable;
 
-    @OneToMany(mappedBy = "court")
+    @OneToMany(mappedBy = "court",cascade = CascadeType.ALL)
     private Set<Event> events = new HashSet<>();
 
+    @Column
+    LocalDateTime createdAt;
+
     public Court() {
-        System.out.println("court name");
+        this.createdAt = LocalDateTime.now();
     }
 
     public Court(String name, String location, String type, Boolean isAvailable) {
-        System.out.println("court name" + name);
         this.name = name;
         this.location = location;
         this.type = type;
         this.isAvailable = isAvailable;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Court(String name, String location, String type, Boolean isAvailable, Set<Event> events) {
@@ -53,6 +57,7 @@ public class Court {
         this.type = type;
         this.isAvailable = isAvailable;
         this.events = events;
+        this.createdAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -109,6 +114,10 @@ public class Court {
 
     public void removeEvent(Event event) {
         this.events.remove(event);
+    }
+
+    public String getCreatedAt() {
+        return createdAt.toString();
     }
 
     @Override

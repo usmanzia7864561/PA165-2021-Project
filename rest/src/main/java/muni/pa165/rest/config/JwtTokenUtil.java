@@ -1,7 +1,6 @@
 package muni.pa165.rest.config;
 
 import io.jsonwebtoken.*;
-import muni.pa165.api.dto.UserDTO;
 import muni.pa165.api.dto.UserResponseDTO;
 import org.springframework.stereotype.Component;
 

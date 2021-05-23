@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /*
  * Participant Data access object interface
@@ -50,4 +51,6 @@ public interface ParticipantDao {
      * @return
      */
     List<Participant> findByName(String name) ;
+
+    List<Participant> getByEventParticipants(long eventId);
 }

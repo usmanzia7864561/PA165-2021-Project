@@ -5,13 +5,15 @@ import muni.pa165.persistence.entity.Court;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 @Service
 public interface CourtFacade {
     /**
      * Find Court By Name
+     * @return
      */
-    CourtDTO findByName(String name);
+    List<CourtDTO> findByName(String name);
     /**
      * Register Court
      */
@@ -23,9 +25,9 @@ public interface CourtFacade {
     /**
      * Remove Court
      */
-    void remove(Court court);
+    void remove(CourtDTO court);
     /**
      * find Court by id
      */
-    Optional<Court> findById(Long id);
+    CourtDTO findById(Long id);
 }

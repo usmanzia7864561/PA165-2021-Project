@@ -1,6 +1,5 @@
 package muni.pa165.persistence.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import muni.pa165.persistence.enums.EventType;
 
 import javax.persistence.*;
@@ -37,7 +36,6 @@ public class Event {
     private LocalTime endTime;
 
     @Column(nullable = false)
-    @JsonFormat(pattern="yyyy-mm-dd")
     private LocalDate eventDate;
 
     @Column(nullable = false)
@@ -50,7 +48,7 @@ public class Event {
     @ManyToOne
     private Court court;
 
-    @OneToMany(mappedBy = "event",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Participant> participants = new HashSet<>();
 
     public Event() { }
@@ -115,17 +113,25 @@ public class Event {
         this.description = description;
     }
 
-//    public void setStartTime(LocalTime startTime) {
-//        this.startTime = startTime;
-//    }
-//
-//    public void setEndTime(LocalTime endTime) {
-//        this.endTime = endTime;
-//    }
+    public void setStartTime(String startTime) {
+        this.startTime = LocalTime.parse(startTime);
+    }
 
-//    public void setEventDate(LocalDate eventDate) {
-//        this.eventDate = eventDate;
-//    }
+    public LocalTime getStartTime() {
+        return this.startTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = LocalTime.parse(endTime);
+    }
+
+    public String getEndTime() {
+        return this.endTime.toString();
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = LocalDate.parse(eventDate);
+    }
 
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
@@ -141,6 +147,7 @@ public class Event {
     }
 
     public void addParticipant(Participant participant){
+        participant.setEvent(this);
         this.participants.add(participant);
     }
 
