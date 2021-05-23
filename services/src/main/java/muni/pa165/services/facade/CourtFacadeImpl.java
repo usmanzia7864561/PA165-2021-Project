@@ -44,12 +44,13 @@ public class CourtFacadeImpl implements CourtFacade {
     }
 
     @Override
-    public void remove(Court court) {
-        courtService.remove(court);
+    public void remove(CourtDTO court) {
+        courtService.remove(dozerConverter.convert(court,Court.class));
     }
 
     @Override
-    public Optional<Court> findById(Long id) {
-        return courtService.findById(id);
+    public CourtDTO findById(Long id) {
+        Optional<Court> court = courtService.findById(id);
+        return court.map(value -> dozerConverter.convert(value, CourtDTO.class)).orElse(null);
     }
 }

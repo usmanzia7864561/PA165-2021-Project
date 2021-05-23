@@ -1,5 +1,6 @@
 package muni.pa165.services;
 
+import muni.pa165.api.dto.ParticipantDTO;
 import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.Participant;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,6 @@ public interface EventService {
     boolean participantAvailability(Participant p);
 
     List<Event> getAllCourtEvents(long id);
+
+    Participant addParticipant(long eventId, Participant participant);
 }

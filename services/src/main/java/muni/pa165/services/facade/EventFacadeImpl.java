@@ -1,8 +1,10 @@
 package muni.pa165.services.facade;
 
 import muni.pa165.api.dto.EventDTO;
+import muni.pa165.api.dto.ParticipantDTO;
 import muni.pa165.api.facade.EventFacade;
 import muni.pa165.persistence.entity.Event;
+import muni.pa165.persistence.entity.Participant;
 import muni.pa165.services.EventService;
 import muni.pa165.services.converter.DozerConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,8 @@ public class EventFacadeImpl implements EventFacade {
     @Inject
     private DozerConverter dozerConverter;
 
-    public EventFacadeImpl() {}
+    public EventFacadeImpl() {
+    }
 
     public EventFacadeImpl(EventService eventService, DozerConverter dozerConverter) {
         this.eventService = eventService;
@@ -41,6 +44,21 @@ public class EventFacadeImpl implements EventFacade {
         System.out.println("Add event " + ev.toString());
         eventService.createEvent(ev);
         return eventDTO;
+    }
+
+    @Override
+    public ParticipantDTO addParticipant(long eventId, ParticipantDTO participantDTO) {
+        Participant participant = eventService.addParticipant(eventId, dozerConverter.convert(participantDTO, Participant.class));
+        return dozerConverter.convert(participant, ParticipantDTO.class);
+    }
+
+    @Override
+    public boolean remove(long id) {
+        Optional<Event> event = eventService.getEventById(id);
+        return event.map(value -> {
+            eventService.removeEvent(value);
+            return true;
+        }).orElse(false);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package muni.pa165.api.facade;
 
 import muni.pa165.api.dto.EventDTO;
+import muni.pa165.api.dto.ParticipantDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -33,6 +34,13 @@ public interface EventFacade {
      * Create the new Event.
      */
     EventDTO createEvent(EventDTO eventDTO);
+
+    /**
+     * Add new participant.
+     */
+    ParticipantDTO addParticipant(long eventId, ParticipantDTO participantDTO);
+
+    boolean remove(long id);
 }
 
 

@@ -25,9 +25,9 @@ public interface CourtFacade {
     /**
      * Remove Court
      */
-    void remove(Court court);
+    void remove(CourtDTO court);
     /**
      * find Court by id
      */
-    Optional<Court> findById(Long id);
+    CourtDTO findById(Long id);
 }

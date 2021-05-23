@@ -1,12 +1,11 @@
 package muni.pa165.rest.controllers;
 
-import muni.pa165.api.dto.CourtDTO;
 import muni.pa165.api.dto.EventDTO;
-import muni.pa165.api.facade.CourtFacade;
 import muni.pa165.api.facade.EventFacade;
-import muni.pa165.persistence.entity.Court;
+import muni.pa165.rest.models.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -28,7 +27,7 @@ public class EventController {
         return eventFacade.findEventById(id);
     }
 
-    @GetMapping(value = "/court/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/court/{courtId}",produces = MediaType.APPLICATION_JSON_VALUE)
     Collection<EventDTO> byCourt(@PathVariable long courtId){
         return eventFacade.getAllCourtEvents(courtId);
     }
@@ -44,7 +43,10 @@ public class EventController {
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String delete(@PathVariable long id){
-        return "delete " + id;
+    public ResponseEntity<GenericResponse> delete(@PathVariable long id){
+        if (eventFacade.remove(id)){
+            return ResponseEntity.ok().body(new GenericResponse("Event deleted successfully"));
+        }
+        return ResponseEntity.status(404).body(new GenericResponse("Event not found"));
     }
 }

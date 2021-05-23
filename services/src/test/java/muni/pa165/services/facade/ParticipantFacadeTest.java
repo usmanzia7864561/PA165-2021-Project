@@ -2,6 +2,7 @@ package muni.pa165.services.facade;
 
 import muni.pa165.api.dto.ParticipantDTO;
 import muni.pa165.api.facade.ParticipantFacade;
+import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.Participant;
 import muni.pa165.services.ParticipantService;
 import muni.pa165.services.config.ServiceConfig;
@@ -31,7 +32,7 @@ public class ParticipantFacadeTest {
 
     ParticipantService participantService = mock(ParticipantService.class);
 
-    ParticipantDTO participantDTO = new ParticipantDTO("Usman");
+    ParticipantDTO participantDTO = new ParticipantDTO("Usman",new Event());
     Participant participant;
 
     @BeforeClass

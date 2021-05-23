@@ -147,6 +147,7 @@ public class Event {
     }
 
     public void addParticipant(Participant participant){
+        participant.setEvent(this);
         this.participants.add(participant);
     }
 

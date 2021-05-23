@@ -13,7 +13,7 @@ public class Participant {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Event event;
 
     public Participant() { }

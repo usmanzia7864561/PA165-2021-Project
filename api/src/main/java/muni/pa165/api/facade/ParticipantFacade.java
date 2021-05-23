@@ -1,12 +1,16 @@
 package muni.pa165.api.facade;
 
 import muni.pa165.api.dto.ParticipantDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * ParticipantFacade interfaces for all possible methods for it's implementation
  */
+
+@Service
 public interface ParticipantFacade {
     /**
      * Find Participant By Name
@@ -16,8 +20,9 @@ public interface ParticipantFacade {
 
     /**
      * Register Participant
+     * @return
      */
-    void createParticipant(ParticipantDTO c);
+    ParticipantDTO createParticipant(ParticipantDTO c);
 
     /**
      * Get All Participants
@@ -34,4 +39,6 @@ public interface ParticipantFacade {
      * @return
      */
     ParticipantDTO findById(Long id);
+
+    List<ParticipantDTO> getByEventParticipants(long eventId);
 }

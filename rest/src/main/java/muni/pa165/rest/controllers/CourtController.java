@@ -46,9 +46,10 @@ public class CourtController {
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GenericResponse> delete(@PathVariable long id){
-        Optional<Court> court = courtFacade.findById(id);
-        if (court.isPresent()){
-            courtFacade.remove(court.get());
+        CourtDTO court = courtFacade.findById(id);
+        System.out.println("court for delete " + court);
+        if (!court.getName().isEmpty()){
+            courtFacade.remove(court);
             return ResponseEntity.ok(new GenericResponse("Court deleted successfully"));
         }
         return ResponseEntity.badRequest().body(new GenericResponse("Failed to delete the court"));
