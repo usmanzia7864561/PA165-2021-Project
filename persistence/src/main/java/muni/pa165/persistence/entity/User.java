@@ -40,7 +40,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Event> events = new HashSet<>();
 
-    public User(){ }
+    public User(){
+        this.createdAt = LocalDateTime.now();
+    }
 
     /**
      * @param name
@@ -88,8 +90,32 @@ public class User {
     public String getPassword() {
         return this.password;
     }
+
     public void setPassword(String password) { this.password = password; }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
 
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
@@ -126,5 +152,17 @@ public class User {
         result = 31 * result + email.hashCode();
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
+    }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", createdAt=" + createdAt +
+                ", type=" + type +
+                '}';
     }
 }

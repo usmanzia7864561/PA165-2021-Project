@@ -10,6 +10,6 @@ import java.util.List;
  */
 @Service
 public interface DozerConverter {
-    public  <T> List<T> convert(Collection<?> objects, Class<T> mapToClass);
-    public  <T> T convert(Object u, Class<T> mapToClass);
+    <T, F> T convert(F from, Class<T> to);
+    <T, F> List<T> convert(List<F> from, Class<T> to);
 }

@@ -39,4 +39,6 @@ public interface UserService {
     Optional<User> findUserById(Long userId);
 
     Optional<User> findUserByEmail(String email);
+
+    boolean delete(long id);
 }

@@ -1,5 +1,6 @@
 package muni.pa165.api.facade;
 
+import muni.pa165.api.dto.UserAuthDTO;
 import muni.pa165.api.dto.UserAuthenticateDTO;
 import muni.pa165.api.dto.UserDTO;
 
@@ -39,6 +40,11 @@ public interface UserFacade {
      * Try to authenticate a user. Return true only if the hashed password matches the records.
      */
     boolean authenticate(UserAuthenticateDTO u);
+
+    /**
+     * delete a user from database.
+     */
+    boolean delete(long id);
 
     /**
      * Check if the given user is admin.

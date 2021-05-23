@@ -1,31 +1,30 @@
 package muni.pa165.services.converter;
 
-import com.github.dozermapper.core.DozerBeanMapperBuilder;
-import com.github.dozermapper.core.Mapper;
+import org.dozer.DozerBeanMapper;
+import org.springframework.stereotype.Service;
 
-import javax.inject.Named;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Taken from the eshop project from github
  */
-@Named("DozerConverter")
+@Service
 public class DozerConverterImpl implements DozerConverter {
-    private final Mapper dozer;
+    DozerBeanMapper mapper;
 
-	public DozerConverterImpl(){
-        dozer = DozerBeanMapperBuilder.buildDefault();
+    public DozerConverterImpl(){
+        mapper = new DozerBeanMapper();
     }
 
-    public  <T> List<T> convert(Collection<?> objects, Class<T> mapToClass) {
-        List<T> mappedCollection = new ArrayList<>();
-        for (Object object : objects) {
-            mappedCollection.add(dozer.map(object, mapToClass));
-        }
-        return mappedCollection;
+    @Override
+    public <T, F> T convert(F from, Class<T> to) {
+        return mapper.map(from, to);
     }
 
-    public  <T> T convert(Object u, Class<T> mapToClass){ return dozer.map(u,mapToClass); }
+    @Override
+    public <T, F> List<T> convert(List<F> from, Class<T> to) {
+        return from.stream().map(entity->convert(entity,to)).collect(Collectors.toList());
+    }
 }
