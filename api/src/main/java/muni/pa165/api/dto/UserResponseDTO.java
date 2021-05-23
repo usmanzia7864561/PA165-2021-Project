@@ -4,12 +4,8 @@ import muni.pa165.persistence.enums.UserType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
-/**
- * @author Muhammad Abdullah
- */
-public class UserDTO {
+public class UserResponseDTO {
     private Long id;
 
     @NotBlank
@@ -18,26 +14,21 @@ public class UserDTO {
     @Email
     private String email;
 
-    @Size(min = 6,max = 32)
-    private String password;
-
     @NotBlank
     private UserType type;
 
-    public UserDTO() { }
+    public UserResponseDTO() { }
 
-    public UserDTO(Long id,String name, String email, String password, UserType type) {
+    public UserResponseDTO(Long id, String name, String email, UserType type) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
         this.type = type;
     }
 
-    public UserDTO(String name, String email, String password, UserType type) {
+    public UserResponseDTO(String name, String email, UserType type) {
         this.name = name;
         this.email = email;
-        this.password = password;
         this.type = type;
     }
 
@@ -55,14 +46,6 @@ public class UserDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -97,16 +80,15 @@ public class UserDTO {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        UserDTO other = (UserDTO) obj;
+        UserResponseDTO other = (UserResponseDTO) obj;
         if (email == null) return other.email == null;
         else return email.equals(other.email);
     }
 
     @Override
     public String toString() {
-        return "UserDTO{" +
+        return "UserResponseDTO{" +
                 "id=" + id +
-                ", passwordHash='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", givenName='" + name + '\'' +
                 ", type='" + type + '\'' +

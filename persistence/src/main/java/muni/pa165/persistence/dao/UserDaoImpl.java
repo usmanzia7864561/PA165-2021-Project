@@ -62,4 +62,10 @@ public class UserDaoImpl implements UserDao{
     public Optional<User> findByEmail(String email) {
         return Optional.empty();
     }
+
+    @Override
+    public User update(long id, User user) {
+
+        return this.entityManager.createQuery("",User.class).getSingleResult();
+    }
 }

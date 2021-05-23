@@ -1,6 +1,7 @@
 package muni.pa165.rest.interceptors;
 
 import muni.pa165.api.dto.UserDTO;
+import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.api.facade.UserFacade;
 import muni.pa165.persistence.enums.UserType;
 import muni.pa165.rest.config.JwtTokenUtil;
@@ -45,12 +46,12 @@ public class JWTFilter  extends OncePerRequestFilter {
             return;
         }
 
-        UserDTO userDTO = userFacade.findUserByEmail(jwtTokenUtil.getEmailFromToken(token));
+        UserResponseDTO userDTO = userFacade.findUserByEmail(jwtTokenUtil.getEmailFromToken(token));
         UserDetails userDetails = null;
 
         if (!userDTO.getEmail().isEmpty()){
             Roles roles = userDTO.getType()==UserType.MANAGER?new Roles(Roles.MANAGER):new Roles(Roles.TENNIS_USER);
-            userDetails = new User(userDTO.getEmail(),userDTO.getPassword(),List.of(roles));
+            userDetails = new User(userDTO.getEmail(),userDTO.getEmail(),List.of(roles));
         }
 
 

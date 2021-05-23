@@ -2,6 +2,8 @@ package muni.pa165.services.facade;
 
 import muni.pa165.api.dto.UserAuthenticateDTO;
 import muni.pa165.api.dto.UserDTO;
+import muni.pa165.api.dto.UserResponseDTO;
+import muni.pa165.api.dto.UserUpdateDTO;
 import muni.pa165.api.facade.UserFacade;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.services.UserService;
@@ -34,15 +36,15 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public UserDTO findUserById(Long userId) {
+    public UserResponseDTO findUserById(Long userId) {
         Optional<User> user = userService.findUserById(userId);
-        return dozerConverter.convert(user, UserDTO.class);
+        return user.map(value -> dozerConverter.convert(value, UserResponseDTO.class)).orElse(null);
     }
 
     @Override
-    public UserDTO findUserByEmail(String email) {
+    public UserResponseDTO findUserByEmail(String email) {
         Optional<User> user = userService.findUserByEmail(email);
-        return dozerConverter.convert(user, UserDTO.class);
+        return user.map(value -> dozerConverter.convert(value, UserResponseDTO.class)).orElse(null);
     }
 
     @Override
@@ -54,8 +56,8 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public Collection<UserDTO> getAllUsers() {
-        return dozerConverter.convert(userService.getAllUsers(), UserDTO.class);
+    public Collection<UserResponseDTO> getAllUsers() {
+        return dozerConverter.convert(userService.getAllUsers(), UserResponseDTO.class);
     }
 
     @Override
@@ -72,5 +74,11 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public boolean isManager(UserDTO u) {
         return userService.isManager(dozerConverter.convert(u, User.class));
+    }
+
+    @Override
+    public UserResponseDTO update(long id, UserUpdateDTO userUpdateDTO) {
+        User updatedUser = userService.update(id,dozerConverter.convert(userUpdateDTO, User.class));
+        return dozerConverter.convert(updatedUser,UserResponseDTO.class);
     }
 }

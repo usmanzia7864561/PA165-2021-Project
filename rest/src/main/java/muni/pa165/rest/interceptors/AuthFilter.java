@@ -1,6 +1,7 @@
 package muni.pa165.rest.interceptors;
 
 import muni.pa165.api.dto.UserDTO;
+import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.api.facade.UserFacade;
 import muni.pa165.persistence.enums.UserType;
 import muni.pa165.rest.config.Roles;
@@ -40,13 +41,13 @@ public class AuthFilter  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(email -> {
-            UserDTO userDTO = userFacade.findUserByEmail(email);
+            UserResponseDTO userDTO = userFacade.findUserByEmail(email);
             if (userDTO.getEmail().isEmpty()){
                 throw new UsernameNotFoundException("not a valid user");
             }
 
             Roles roles = userDTO.getType()== UserType.MANAGER?new Roles(Roles.MANAGER):new Roles(Roles.TENNIS_USER);
-            return new User(userDTO.getEmail(),userDTO.getPassword(), List.of(roles));
+            return new User(userDTO.getEmail(),userDTO.getEmail(), List.of(roles));
         });
     }
 

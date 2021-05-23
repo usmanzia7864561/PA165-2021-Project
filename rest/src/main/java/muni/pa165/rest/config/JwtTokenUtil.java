@@ -2,6 +2,7 @@ package muni.pa165.rest.config;
 
 import io.jsonwebtoken.*;
 import muni.pa165.api.dto.UserDTO;
+import muni.pa165.api.dto.UserResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -37,7 +38,7 @@ public class JwtTokenUtil  implements Serializable {
         return expiration.before(new Date());
     }
 
-    public String generateToken(UserDTO userDetails) {
+    public String generateToken(UserResponseDTO userDetails) {
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, userDetails.getEmail());
     }

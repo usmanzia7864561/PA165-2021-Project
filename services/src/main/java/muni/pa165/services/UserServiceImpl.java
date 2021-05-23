@@ -1,5 +1,6 @@
 package muni.pa165.services;
 
+import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.persistence.dao.UserDao;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.UserType;
@@ -51,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserById(Long userId) {
+        System.out.println("findUserById " + userId);
         return userDao.findById(userId);
     }
 
@@ -71,6 +73,11 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public User update(long id, User user) {
+        return userDao.update(id,user);
     }
 
     public static String createHash(String password) {
