@@ -1,6 +1,7 @@
 package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.Court;
+import muni.pa165.persistence.entity.Event;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,5 +55,15 @@ public class CourtDaoImpl implements CourtDao
     @Override
     public List<Court> findByName(String name) {
         return this.entityManager.createQuery("select c from Court c where name=:name",Court.class).setParameter("name",name).getResultList();
+    }
+
+    @Override
+    public Optional<Event> addEventToCourt(long courtId, Event event) {
+        Optional<Court> court = this.findById(courtId);
+        if (court.isPresent()){
+            court.get().addEvent(event);
+            return Optional.ofNullable(event);
+        }
+        return Optional.empty();
     }
 }

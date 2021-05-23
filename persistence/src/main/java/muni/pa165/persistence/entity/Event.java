@@ -101,8 +101,8 @@ public class Event {
         return description;
     }
 
-    public LocalDate getEventDate() {
-        return eventDate;
+    public String getEventDate() {
+        return eventDate.toString();
     }
 
     public EventType getEventType() {
@@ -117,8 +117,8 @@ public class Event {
         this.startTime = LocalTime.parse(startTime);
     }
 
-    public LocalTime getStartTime() {
-        return this.startTime;
+    public String getStartTime() {
+        return this.startTime.toString();
     }
 
     public void setEndTime(String endTime) {
@@ -143,7 +143,6 @@ public class Event {
 
     public void setCourt(Court court) {
         this.court = court;
-        court.addEvent(this);
     }
 
     public void addParticipant(Participant participant){

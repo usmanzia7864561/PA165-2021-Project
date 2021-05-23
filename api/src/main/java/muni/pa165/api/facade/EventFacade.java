@@ -33,7 +33,7 @@ public interface EventFacade {
     /**
      * Create the new Event.
      */
-    EventDTO createEvent(EventDTO eventDTO);
+    EventDTO createEvent(long courtId, EventDTO eventDTO);
 
     /**
      * Add new participant.
