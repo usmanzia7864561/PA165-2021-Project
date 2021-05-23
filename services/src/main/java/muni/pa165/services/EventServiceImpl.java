@@ -49,4 +49,9 @@ public class EventServiceImpl  implements EventService {
         Integer totalTime = Integer.parseInt(participantEventInfo.get(0).toString());
         return totalTime <= 2;
     }
+
+    @Override
+    public List<Event> getAllCourtEvents(long id) {
+        return eventDao.findAllByCourt(id);
+    }
 }

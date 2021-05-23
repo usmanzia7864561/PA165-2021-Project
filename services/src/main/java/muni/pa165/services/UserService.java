@@ -1,6 +1,5 @@
 package muni.pa165.services;
 
-import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.persistence.entity.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -43,5 +42,5 @@ public interface UserService {
 
     boolean delete(long id);
 
-    User update(long id, User user);
+    Optional<User> update(long id, User user);
 }

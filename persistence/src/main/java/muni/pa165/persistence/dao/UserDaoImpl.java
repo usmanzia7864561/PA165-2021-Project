@@ -64,8 +64,14 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public User update(long id, User user) {
-
-        return this.entityManager.createQuery("",User.class).getSingleResult();
+    public Optional<User> update(long id, User user) {
+        Optional<User> u = this.findById(id);
+        if (u.isPresent()){
+            u.get().setPassword(user.getPassword());
+            u.get().setName(user.getName());
+            u.get().setType(user.getType());
+            this.entityManager.merge(u.get());
+        }
+        return this.findById(id);
     }
 }

@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/event")
 public class EventController {
     @Autowired
     EventFacade eventFacade;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/",produces = MediaType.APPLICATION_JSON_VALUE)
     Collection<EventDTO> index(){
         return eventFacade.getAllEvents();
     }
@@ -25,6 +26,11 @@ public class EventController {
     @GetMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public  EventDTO fetchById(@PathVariable long id){
         return eventFacade.findEventById(id);
+    }
+
+    @GetMapping(value = "/court/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    Collection<EventDTO> byCourt(@PathVariable long courtId){
+        return eventFacade.getAllCourtEvents(courtId);
     }
 
     @PostMapping(value = "/add",produces = MediaType.APPLICATION_JSON_VALUE)

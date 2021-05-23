@@ -1,15 +1,14 @@
 package muni.pa165.services;
 
-import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.persistence.dao.UserDao;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.validation.ValidationException;
 import java.security.SecureRandom;
@@ -25,7 +24,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    public UserServiceImpl() { }
+    PasswordEncoder encoder;
+
+
+    public UserServiceImpl() {
+        encoder = new BCryptPasswordEncoder();
+    }
 
     @Override
     public User registerUser(User user) throws ValidationException, DataAccessException {
@@ -52,7 +56,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserById(Long userId) {
-        System.out.println("findUserById " + userId);
         return userDao.findById(userId);
     }
 
@@ -76,19 +79,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(long id, User user) {
+    public Optional<User> update(long id, User user) {
+        user.setPassword(createHash(user.getPassword()));
         return userDao.update(id,user);
     }
 
-    public static String createHash(String password) {
-        BCryptPasswordEncoder bCryptPasswordEncoder =
-                new BCryptPasswordEncoder(20, new SecureRandom());
-        return bCryptPasswordEncoder.encode(password);
+    public String createHash(String password) {
+        return encoder.encode(password);
     }
 
-    public static boolean validatePassword(String password, String correctHash) {
-        if(password==null) return false;
-        if(correctHash==null) throw new IllegalArgumentException("password hash is null");
-        return createHash(password).equals(correctHash);
+    public boolean validatePassword(String password, String correctHash) {
+        return encoder.matches(password, correctHash);
     }
 }

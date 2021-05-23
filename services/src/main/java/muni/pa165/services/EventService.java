@@ -43,4 +43,5 @@ public interface EventService {
      */
     boolean participantAvailability(Participant p);
 
+    List<Event> getAllCourtEvents(long id);
 }

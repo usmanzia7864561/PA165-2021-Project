@@ -5,13 +5,15 @@ import muni.pa165.persistence.entity.Court;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 @Service
 public interface CourtFacade {
     /**
      * Find Court By Name
+     * @return
      */
-    CourtDTO findByName(String name);
+    List<CourtDTO> findByName(String name);
     /**
      * Register Court
      */

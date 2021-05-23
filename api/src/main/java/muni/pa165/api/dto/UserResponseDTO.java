@@ -4,6 +4,7 @@ import muni.pa165.persistence.enums.UserType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 public class UserResponseDTO {
     private Long id;
@@ -16,6 +17,8 @@ public class UserResponseDTO {
 
     @NotBlank
     private UserType type;
+
+    private String createdAt;
 
     public UserResponseDTO() { }
 
@@ -62,6 +65,14 @@ public class UserResponseDTO {
 
     public void setType(UserType type) {
         this.type = type;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override

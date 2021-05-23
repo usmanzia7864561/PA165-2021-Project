@@ -20,6 +20,11 @@ public interface EventFacade {
     Collection<EventDTO> getAllEvents();
 
     /**
+     * Get all Event of a specific court
+     */
+    Collection<EventDTO> getAllCourtEvents(long id);
+
+    /**
      * Get today Event
      */
     Collection<EventDTO> getTodayEvents();

@@ -77,8 +77,8 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public UserResponseDTO update(long id, UserUpdateDTO userUpdateDTO) {
-        User updatedUser = userService.update(id,dozerConverter.convert(userUpdateDTO, User.class));
-        return dozerConverter.convert(updatedUser,UserResponseDTO.class);
+    public UserUpdateDTO update(long id, UserUpdateDTO userUpdateDTO) {
+        Optional<User> updatedUser = userService.update(id,dozerConverter.convert(userUpdateDTO, User.class));
+        return updatedUser.map(user -> dozerConverter.convert(user, UserUpdateDTO.class)).orElse(null);
     }
 }

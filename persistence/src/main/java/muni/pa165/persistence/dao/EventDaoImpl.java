@@ -78,4 +78,9 @@ public class EventDaoImpl implements  EventDao {
         return this.entityManager.createQuery("select SEC_TO_TIME(SUM(UNIX_TIMESTAMP(e.endTime) - UNIX_TIMESTAMP(e.startTime))) AS totalTime from Event e where eventDate=:todayDate AND participants=:participant").setParameter("eventDate",todayDate).setParameter("participant",userId).getResultList();
     }
 
+    @Override
+    public List<Event> findAllByCourt(long id) {
+        return this.entityManager.createQuery("select e from Event e where court_id=:courtId", Event.class).setParameter("courtId",id).getResultList();
+    }
+
 }

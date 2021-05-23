@@ -1,20 +1,23 @@
 package muni.pa165.api.dto;
 
+import muni.pa165.persistence.entity.Participant;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.EventType;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class EventDTO {
     private Long id;
     private String name;
     private String description;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private LocalDate eventDate;
+    private String startTime;
+    private String endTime;
+    private String eventDate;
     private EventType eventType;
-    private User createdBy;
 
     public EventDTO() { }
 
@@ -26,7 +29,7 @@ public class EventDTO {
         return eventType;
     }
 
-    public EventDTO(String name, String description, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType type) {
+    public EventDTO(String name, String description, String startTime, String endTime, String eventDate, EventType type,Set<Participant> participants) {
         this.name = name;
         this.description = description;
         this.startTime = startTime;
@@ -51,19 +54,19 @@ public class EventDTO {
         this.description = description;
     }
 
-    public LocalTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -75,15 +78,13 @@ public class EventDTO {
         this.id = id;
     }
 
-    public LocalDate getEventDate() {
+    public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(LocalDate eventDate) {
+    public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
-
-
 
     @Override
     public String toString() {
@@ -95,17 +96,6 @@ public class EventDTO {
                 ", endTime=" + endTime +
                 ", eventDate=" + eventDate +
                 ", eventType=" + eventType +
-                ", createdBy=" + createdBy +
                 '}';
-    }
-
-
-
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
     }
 }

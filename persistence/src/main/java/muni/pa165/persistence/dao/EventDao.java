@@ -30,4 +30,6 @@ public interface EventDao {
     List<Event> getTodayEvent();
 
     <Optional>List calculateParticipantEventTimeToday(Long id);
+
+    List<Event> findAllByCourt(long id);
 }

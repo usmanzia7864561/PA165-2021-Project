@@ -31,7 +31,7 @@ public class EventFacadeImpl implements EventFacade {
     @Override
     public EventDTO findEventById(Long eventId) {
         Optional<Event> event = eventService.getEventById(eventId);
-        return event.isEmpty() ? null : dozerConverter.convert(event, EventDTO.class);
+        return event.map(value -> dozerConverter.convert(value, EventDTO.class)).orElse(null);
     }
 
     @Override
@@ -46,8 +46,12 @@ public class EventFacadeImpl implements EventFacade {
     @Override
     public Collection<EventDTO> getAllEvents() {
         List<Event> events = eventService.getAllEvents();
-        List<EventDTO> ev = dozerConverter.convert(events, EventDTO.class);
+        return dozerConverter.convert(events, EventDTO.class);
+    }
 
+    @Override
+    public Collection<EventDTO> getAllCourtEvents(long id) {
+        List<Event> events = eventService.getAllCourtEvents(id);
         return dozerConverter.convert(events, EventDTO.class);
     }
 

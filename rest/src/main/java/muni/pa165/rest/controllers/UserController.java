@@ -1,20 +1,18 @@
 package muni.pa165.rest.controllers;
 
-import muni.pa165.api.dto.UserDTO;
 import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.api.dto.UserUpdateDTO;
 import muni.pa165.api.facade.UserFacade;
-import muni.pa165.rest.config.Roles;
 import muni.pa165.rest.models.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.Collection;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/user")
 public class UserController {
     @Autowired
@@ -31,7 +29,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserResponseDTO update(@PathVariable long id, @RequestBody UserUpdateDTO userDTO){
+    public UserUpdateDTO update(@PathVariable long id, @RequestBody UserUpdateDTO userDTO){
         return userFacade.update(id, userDTO);
     }
 

@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CourtFacedImpl implements CourtFacade {
-
+public class CourtFacadeImpl implements CourtFacade {
     @Autowired
     private CourtService courtService;
 
@@ -26,16 +25,13 @@ public class CourtFacedImpl implements CourtFacade {
     private DozerConverter dozerConverter;
 
     @Override
-    public CourtDTO findByName(String name) {
-
+    public List<CourtDTO> findByName(String name) {
        List<Court> court = courtService.findByName(name);
-       return court.isEmpty() ? null : dozerConverter.convert((Object) court, CourtDTO.class);
-
+       return dozerConverter.convert(court, CourtDTO.class);
     }
 
     @Override
     public CourtDTO registerCourt(CourtDTO c) {
-
         Court courtEntity = dozerConverter.convert(c, Court.class);
         courtService.registerCourt(courtEntity);
         c.setId(courtEntity.getId());
@@ -44,20 +40,16 @@ public class CourtFacedImpl implements CourtFacade {
 
     @Override
     public Collection<CourtDTO> getAllCourtDTO() {
-        List<CourtDTO> courtDTOS = dozerConverter.convert(courtService.GetAllCourt(), CourtDTO.class);
-        return courtDTOS;
+        return dozerConverter.convert(courtService.GetAllCourt(), CourtDTO.class);
     }
 
     @Override
     public void remove(Court court) {
-
         courtService.remove(court);
-
     }
 
     @Override
     public Optional<Court> findById(Long id) {
-        Optional<Court> court = courtService.findById(id);
-        return court;
+        return courtService.findById(id);
     }
 }
