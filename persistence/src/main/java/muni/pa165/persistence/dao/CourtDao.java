@@ -17,8 +17,9 @@ public interface CourtDao
     /**
      * Create new court instance in database
      * @param court
+     * @return
      */
-    void create(Court court);
+    <Optional> java.util.Optional<Court> create(Court court);
 
     /**
      * Get all courts in database

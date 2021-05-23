@@ -13,10 +13,18 @@ public class EventDTO {
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDate eventDate;
-    private EventType type;
+    private EventType eventType;
     private User createdBy;
 
     public EventDTO() { }
+
+    public void setEventType(EventType eventType) {
+        this.eventType = eventType;
+    }
+
+    public EventType getEventType() {
+        return eventType;
+    }
 
     public EventDTO(String name, String description, LocalTime startTime, LocalTime endTime, LocalDate eventDate, EventType type) {
         this.name = name;
@@ -24,7 +32,7 @@ public class EventDTO {
         this.startTime = startTime;
         this.endTime = endTime;
         this.eventDate = eventDate;
-        this.type = type;
+        this.eventType = type;
     }
 
     public String getName() {
@@ -59,6 +67,14 @@ public class EventDTO {
         this.endTime = endTime;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public LocalDate getEventDate() {
         return eventDate;
     }
@@ -67,13 +83,23 @@ public class EventDTO {
         this.eventDate = eventDate;
     }
 
-    public EventType getType() {
-        return type;
+
+
+    @Override
+    public String toString() {
+        return "EventDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", eventDate=" + eventDate +
+                ", eventType=" + eventType +
+                ", createdBy=" + createdBy +
+                '}';
     }
 
-    public void setType(EventType type) {
-        this.type = type;
-    }
+
 
     public User getCreatedBy() {
         return createdBy;

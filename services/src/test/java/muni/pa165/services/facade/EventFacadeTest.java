@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
@@ -40,6 +41,7 @@ public class EventFacadeTest {
     EventDTO eventDTO = new EventDTO("Tennis Tournament","No Description",LocalTime.NOON,LocalTime.MIDNIGHT,LocalDate.now(),EventType.TOURNAMENT);
     Event event;
 
+    @Ignore
     @BeforeClass
     public void setup(){
         converter = new DozerConverterImpl();

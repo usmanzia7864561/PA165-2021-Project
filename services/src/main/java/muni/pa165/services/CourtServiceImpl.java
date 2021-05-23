@@ -2,10 +2,13 @@ package muni.pa165.services;
 
 import muni.pa165.persistence.dao.CourtDao;
 import muni.pa165.persistence.entity.Court;
+import org.springframework.stereotype.Service;
+
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CourtServiceImpl implements CourtService{
 
     @Inject

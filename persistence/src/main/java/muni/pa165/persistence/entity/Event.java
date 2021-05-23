@@ -1,5 +1,6 @@
 package muni.pa165.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import muni.pa165.persistence.enums.EventType;
 
 import javax.persistence.*;
@@ -9,7 +10,6 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 
 /**
  * Event entity
@@ -37,6 +37,7 @@ public class Event {
     private LocalTime endTime;
 
     @Column(nullable = false)
+    @JsonFormat(pattern="yyyy-mm-dd")
     private LocalDate eventDate;
 
     @Column(nullable = false)
@@ -49,7 +50,7 @@ public class Event {
     @ManyToOne
     private Court court;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event",cascade = CascadeType.ALL)
     private Set<Participant> participants = new HashSet<>();
 
     public Event() { }
@@ -98,21 +99,33 @@ public class Event {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDate getEventDate() {
+        return eventDate;
+    }
+
+    public EventType getEventType() {
+        return eventType;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
+//    public void setStartTime(LocalTime startTime) {
+//        this.startTime = startTime;
+//    }
+//
+//    public void setEndTime(LocalTime endTime) {
+//        this.endTime = endTime;
+//    }
 
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setEventDate(LocalDate eventDate) {
-        this.eventDate = eventDate;
-    }
+//    public void setEventDate(LocalDate eventDate) {
+//        this.eventDate = eventDate;
+//    }
 
     public void setEventType(EventType eventType) {
         this.eventType = eventType;

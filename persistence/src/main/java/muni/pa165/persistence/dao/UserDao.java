@@ -29,4 +29,6 @@ public interface UserDao {
     List<User> findByName(String name) ;
 
     Optional<User> findByEmail(String email) ;
+
+    User update(long id, User user);
 }
