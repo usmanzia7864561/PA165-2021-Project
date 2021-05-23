@@ -21,3 +21,7 @@ Use Case Diagram
 
 Class Diagram
 [tennis_club.png](tennis_club.png)
+
+**API Endpoints list**
+
+[postman_collection.json](PA165-Project.postman_collection.json)
