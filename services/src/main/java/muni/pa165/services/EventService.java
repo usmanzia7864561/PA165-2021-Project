@@ -2,10 +2,12 @@ package muni.pa165.services;
 
 import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.Participant;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface EventService {
 
     /**

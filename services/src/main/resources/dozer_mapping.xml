@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <mappings xmlns="http://dozer.sourceforge.net"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://dozer.sourceforge.net
       http://dozer.sourceforge.net/schema/beanmapping.xsd">
-    <mapping date-format="MM-dd-yyyy HH:mm:ss">
+    <mapping>
+
         <class-a>muni.pa165.api.dto.EventDTO</class-a>
         <class-b>muni.pa165.persistence.entity.Event</class-b>
         <field>
-            <a>eventDate</a>
+            <a date-format="MM-dd-yyyy">eventDate</a>
             <b>eventDate</b>
         </field>
         <field>
-            <a>endTime</a>
+            <a >endTime</a>
             <b>endTime</b>
         </field>
         <field>
@@ -38,3 +40,6 @@
         </field>
     </mapping>
 </mappings>
+<configuration>
+<date-format>MM/dd/yyyy HH:mm</date-format>
+</configuration>

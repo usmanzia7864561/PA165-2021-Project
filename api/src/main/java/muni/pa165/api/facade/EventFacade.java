@@ -1,12 +1,14 @@
 package muni.pa165.api.facade;
 
 import muni.pa165.api.dto.EventDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 /**
  * @author Usman Zia
  */
+@Service
 public interface EventFacade {
 
 
@@ -25,7 +27,7 @@ public interface EventFacade {
     /**
      * Create the new Event.
      */
-    void createEvent(EventDTO eventDTO);
+    EventDTO createEvent(EventDTO eventDTO);
 }
 
 

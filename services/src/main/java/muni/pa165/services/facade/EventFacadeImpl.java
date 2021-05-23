@@ -6,12 +6,14 @@ import muni.pa165.persistence.entity.Event;
 import muni.pa165.services.EventService;
 import muni.pa165.services.converter.DozerConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EventFacadeImpl implements EventFacade {
     @Autowired
     private EventService eventService;
@@ -33,13 +35,19 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
-    public void createEvent(EventDTO eventDTO) {
-        eventService.createEvent(dozerConverter.convert(eventDTO, Event.class));
+    public EventDTO createEvent(EventDTO eventDTO) {
+        Event ev = dozerConverter.convert(eventDTO, Event.class);
+        System.out.println("add event 1" + eventDTO.toString());
+        System.out.println("Add event " + ev.toString());
+        eventService.createEvent(ev);
+        return eventDTO;
     }
 
     @Override
     public Collection<EventDTO> getAllEvents() {
         List<Event> events = eventService.getAllEvents();
+        List<EventDTO> ev = dozerConverter.convert(events, EventDTO.class);
+
         return dozerConverter.convert(events, EventDTO.class);
     }
 

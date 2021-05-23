@@ -2,6 +2,7 @@ package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.Court;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,6 +16,7 @@ import java.util.Optional;
  * @author Muhammad Usman
  */
 @Repository
+@Transactional
 public class CourtDaoImpl implements CourtDao
 {
     @PersistenceContext
@@ -23,8 +25,11 @@ public class CourtDaoImpl implements CourtDao
     public CourtDaoImpl() { }
 
     @Override
-    public void create(Court court) {
+    public <Optional> java.util.Optional<Court> create(Court court) {
+
         this.entityManager.persist(court);
+        return this.findById(court.getId());
+
     }
 
     @Override

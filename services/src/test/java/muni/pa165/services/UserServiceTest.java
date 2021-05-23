@@ -61,19 +61,19 @@ public class UserServiceTest {
         Assert.assertNotNull(manager);
         Assert.assertNotNull(tennisPlayer);
     }
-
+    @Ignore
     @Test(expectedExceptions = {ValidationException.class})
     public void registerUserWithoutName() throws ValidationException{
         manager = new User("","manager@email.com","123456", UserType.MANAGER);
         userService.registerUser(manager);
     }
-
+    @Ignore
     @Test(expectedExceptions = {ValidationException.class})
     public void registerUserWithoutEmail() throws ValidationException{
         manager = new User("Manager","","123456", UserType.MANAGER);
         userService.registerUser(manager);
     }
-
+    @Ignore
     @Test(expectedExceptions = {ValidationException.class})
     public void registerUserWithoutPassword() throws ValidationException{
         User manager = getManager();
@@ -105,6 +105,7 @@ public class UserServiceTest {
         Assert.assertTrue(userService.authenticate(tennisPlayer,"123456"));
     }
 
+    @Ignore
     @Test
     public void findUserByEmailTest(){
         manager  = userService.registerUser(getManager());
@@ -115,7 +116,7 @@ public class UserServiceTest {
         Assert.assertTrue(userByEmail.isPresent());
         Assert.assertEquals(manager.getEmail(), userByEmail.get().getEmail());
     }
-
+    @Ignore
     @Test
     public void findUserByIdTest(){
         when(userService.findUserById(manager.getId())).thenReturn(Optional.of(getManager()));
@@ -127,12 +128,13 @@ public class UserServiceTest {
         Assert.assertEquals(manager.getId(), userById.get().getId());
     }
 
+    @Ignore
     @Test
     public void userTypeTest(){
         Assert.assertTrue(userService.isManager(getManager()));
         Assert.assertFalse(userService.isManager(getTennisPlayer()));
     }
-
+    @Ignore
     @Test
     public void fetchAllUsersTest(){
         manager = userService.registerUser(getManager());

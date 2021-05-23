@@ -3,12 +3,14 @@ package muni.pa165.services;
 import muni.pa165.persistence.dao.EventDao;
 import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.Participant;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EventServiceImpl  implements EventService {
 
     @Inject

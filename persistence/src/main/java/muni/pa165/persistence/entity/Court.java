@@ -1,5 +1,7 @@
 package muni.pa165.persistence.entity;
 
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -27,15 +29,18 @@ public class Court {
     @Column(nullable = false)
     private String type;
 
-    @Column(nullable = false)
+    @Column(nullable = false , columnDefinition = "boolean default false")
     private Boolean isAvailable;
 
     @OneToMany(mappedBy = "court")
     private Set<Event> events = new HashSet<>();
 
-    public Court() { }
+    public Court() {
+        System.out.println("court name");
+    }
 
     public Court(String name, String location, String type, Boolean isAvailable) {
+        System.out.println("court name" + name);
         this.name = name;
         this.location = location;
         this.type = type;
@@ -52,6 +57,42 @@ public class Court {
 
     public Long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setIsAvailable(Boolean available) {
+        isAvailable = available;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Boolean getIsAvailable() {
+        return isAvailable;
     }
 
     public Boolean isCourtAvailable() {
@@ -83,5 +124,17 @@ public class Court {
     public int hashCode()
     {
         return Objects.hash(name, location, type);
+    }
+
+    @Override
+    public String toString() {
+        return "Court{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", type='" + type + '\'' +
+                ", isAvailable=" + isAvailable +
+                ", events=" + events +
+                '}';
     }
 }

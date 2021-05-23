@@ -2,10 +2,11 @@ package muni.pa165.api.facade;
 import muni.pa165.api.dto.CourtDTO;
 
 import muni.pa165.persistence.entity.Court;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
-
+@Service
 public interface CourtFacade {
     /**
      * Find Court By Name
@@ -14,7 +15,7 @@ public interface CourtFacade {
     /**
      * Register Court
      */
-    void registerCourt(CourtDTO c);
+    CourtDTO registerCourt(CourtDTO c);
     /**
      * Get All court
      */

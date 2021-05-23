@@ -1,13 +1,22 @@
 package muni.pa165.api.dto;
 
-import muni.pa165.persistence.enums.UserType;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public class CourtDTO {
+    @NotBlank
     private Long id;
-    private LocalDateTime createdAt;
-    private UserType type;
+
+    @NotBlank
+    private String name;
+    @NotBlank
+    private String location;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private String type;
+
+    private Boolean isAvailable;
 
     public String getName() {
         return name;
@@ -17,7 +26,21 @@ public class CourtDTO {
         this.name = name;
     }
 
-    private String name;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Boolean getIsAvailable() {
+        return isAvailable;
+    }
+
+    public void setIsAvailable(Boolean available) {
+        isAvailable = available;
+    }
+
+    public String getLocation() {
+        return location;
+    }
 
     public Long getId() {
         return id;
@@ -35,11 +58,23 @@ public class CourtDTO {
         this.createdAt = createdAt;
     }
 
-    public UserType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(UserType type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "CourtDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location='" + location + '\'' +
+                ", createdAt=" + createdAt +
+                ", type='" + type + '\'' +
+                ", isAvailable=" + isAvailable +
+                '}';
     }
 }
