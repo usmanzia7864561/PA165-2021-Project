@@ -1,5 +1,5 @@
-insert into Users (id, name, email, password, createdAt, type) values (1, 'Neddie', 'niliffe0@ucoz.ru', '$2a$10$iHIA5z.qawY//kQ3ohJHCekvrP6J7HG5Dks/RkO3F0XQ08q/zeEA2', '2021-01-25 02:05:23', 'MANAGER');
-insert into Users (id, name, email, password, createdAt, type) values (2, 'Cathy', 'cstruther1@topsy.com', '$2a$10$iHIA5z.qawY//kQ3ohJHCekvrP6J7HG5Dks/RkO3F0XQ08q/zeEA2', '2020-09-21 18:47:17', 'TENNIS_USER');
+insert into Users (id, name, email, password, createdAt, type) values (1, 'Neddie', 'manager@email.com', '$2a$10$iHIA5z.qawY//kQ3ohJHCekvrP6J7HG5Dks/RkO3F0XQ08q/zeEA2', '2021-01-25 02:05:23', 'MANAGER');
+insert into Users (id, name, email, password, createdAt, type) values (2, 'Cathy', 'tennis@email.com', '$2a$10$iHIA5z.qawY//kQ3ohJHCekvrP6J7HG5Dks/RkO3F0XQ08q/zeEA2', '2020-09-21 18:47:17', 'TENNIS_USER');
 insert into Users (id, name, email, password, createdAt, type) values (3, 'Cookie', 'cmorson2@icio.us', '$2a$10$iHIA5z.qawY//kQ3ohJHCekvrP6J7HG5Dks/RkO3F0XQ08q/zeEA2', '2021-05-05 02:02:40', 'MANAGER');
 insert into Users (id, name, email, password, createdAt, type) values (4, 'Selene', 'ssmith3@myspace.com', '$2a$10$iHIA5z.qawY//kQ3ohJHCekvrP6J7HG5Dks/RkO3F0XQ08q/zeEA2', '2021-03-21 16:46:21', 'TENNIS_USER');
 insert into Users (id, name, email, password, createdAt, type) values (5, 'Clara', 'cbracey4@amazon.co.jp', '$2a$10$iHIA5z.qawY//kQ3ohJHCekvrP6J7HG5Dks/RkO3F0XQ08q/zeEA2', '2021-04-19 01:42:38', 'MANAGER');

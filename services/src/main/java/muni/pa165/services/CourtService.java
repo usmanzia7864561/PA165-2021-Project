@@ -1,6 +1,7 @@
 package muni.pa165.services;
 
 import muni.pa165.persistence.entity.Court;
+import muni.pa165.persistence.entity.Event;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,4 +29,5 @@ public interface CourtService {
     List<Court> findByName(String name);
 
 
+    Optional<Event> addEventToCourt(long courtId, Event event);
 }

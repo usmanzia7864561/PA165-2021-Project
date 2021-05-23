@@ -6,6 +6,7 @@ import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.EventType;
 import muni.pa165.persistence.enums.UserType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -36,7 +37,7 @@ public class CourtTest extends AbstractTestNGSpringContextTests {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Inject
+    @Autowired
     private CourtDao courtDao;
 
     private Court c1;

@@ -1,6 +1,7 @@
 package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.Court;
+import muni.pa165.persistence.entity.Event;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,4 +47,6 @@ public interface CourtDao
      * @return
      */
     List<Court> findByName(String name) ;
+
+    Optional<Event> addEventToCourt(long courtId, Event event);
 }

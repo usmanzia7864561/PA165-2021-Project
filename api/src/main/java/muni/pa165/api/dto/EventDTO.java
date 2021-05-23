@@ -54,14 +54,6 @@ public class EventDTO {
         this.description = description;
     }
 
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
     public String getEndTime() {
         return endTime;
     }
@@ -76,6 +68,14 @@ public class EventDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getEventDate() {

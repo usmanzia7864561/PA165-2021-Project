@@ -3,8 +3,10 @@ package muni.pa165.services.facade;
 import muni.pa165.api.dto.EventDTO;
 import muni.pa165.api.dto.ParticipantDTO;
 import muni.pa165.api.facade.EventFacade;
+import muni.pa165.persistence.entity.Court;
 import muni.pa165.persistence.entity.Event;
 import muni.pa165.persistence.entity.Participant;
+import muni.pa165.services.CourtService;
 import muni.pa165.services.EventService;
 import muni.pa165.services.converter.DozerConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ import java.util.Optional;
 public class EventFacadeImpl implements EventFacade {
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private CourtService courtService;
 
     @Inject
     private DozerConverter dozerConverter;
@@ -38,12 +43,10 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
-    public EventDTO createEvent(EventDTO eventDTO) {
-        Event ev = dozerConverter.convert(eventDTO, Event.class);
-        System.out.println("add event 1" + eventDTO.toString());
-        System.out.println("Add event " + ev.toString());
-        eventService.createEvent(ev);
-        return eventDTO;
+    public EventDTO createEvent(long courtId, EventDTO eventDTO) {
+        Event e = dozerConverter.convert(eventDTO, Event.class);
+        Optional<Event> event = courtService.addEventToCourt(courtId,e);
+        return event.map(value -> dozerConverter.convert(value, EventDTO.class)).orElse(null);
     }
 
     @Override

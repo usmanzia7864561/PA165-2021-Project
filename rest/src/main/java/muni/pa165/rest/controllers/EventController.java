@@ -32,9 +32,9 @@ public class EventController {
         return eventFacade.getAllCourtEvents(courtId);
     }
 
-    @PostMapping(value = "/add",produces = MediaType.APPLICATION_JSON_VALUE)
-    public EventDTO add(@RequestBody EventDTO eventDTO){
-        return eventFacade.createEvent(eventDTO);
+    @PostMapping(value = "/{courtId}/add",produces = MediaType.APPLICATION_JSON_VALUE)
+    public EventDTO add(@PathVariable long courtId, @RequestBody EventDTO eventDTO){
+        return eventFacade.createEvent(courtId,eventDTO);
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

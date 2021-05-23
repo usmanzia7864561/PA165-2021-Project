@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
@@ -34,7 +35,6 @@ public class AuthController {
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody UserAuthenticateDTO userAuthenticateDTO) {
         try {
-            System.out.println("userFacade.authenticate(userAuthenticateDTO) " + userFacade.authenticate(userAuthenticateDTO));
             if (!userFacade.authenticate(userAuthenticateDTO)) {
                 throw new BadCredentialsException("Email or password invalid");
             }

@@ -2,6 +2,7 @@ package muni.pa165.services;
 
 import muni.pa165.persistence.dao.CourtDao;
 import muni.pa165.persistence.entity.Court;
+import muni.pa165.persistence.entity.Event;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -33,5 +34,10 @@ public class CourtServiceImpl implements CourtService{
     public List<Court> findByName(String name) {
         this.name = name;
         return courtDao.findByName(name);
+    }
+
+    @Override
+    public Optional<Event> addEventToCourt(long courtId, Event event) {
+        return courtDao.addEventToCourt(courtId,event);
     }
 }

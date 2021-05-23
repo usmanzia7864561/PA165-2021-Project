@@ -37,7 +37,7 @@ public class UserController {
 
     @RolesAllowed(Roles.MANAGER)
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> delete(@PathVariable long id){
+    public ResponseEntity<GenericResponse> delete(@PathVariable long id){
         if (userFacade.delete(id)){
             return ResponseEntity.ok(new GenericResponse("User delete successfully"));
         }

@@ -105,6 +105,7 @@ public class Court {
     }
 
     public void addEvent(Event event) {
+        event.setCourt(this);
         this.events.add(event);
     }
 
