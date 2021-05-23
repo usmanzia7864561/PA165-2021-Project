@@ -13,8 +13,8 @@ public class Participant {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Event> events = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Event event;
 
     public Participant() { }
 
@@ -22,15 +22,34 @@ public class Participant {
         this.name = name;
     }
 
+    public Participant(String name,Event event) {
+        this.name = name;
+        this.event = event;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void addEvent(Event event){
-        this.events.add(event);
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void removeEvent(Event event) { this.events.remove(event); }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -40,13 +59,13 @@ public class Participant {
         Participant that = (Participant) o;
 
         if (!name.equals(that.name)) return false;
-        return events.equals(that.events);
+        return event.equals(that.event);
     }
 
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + events.hashCode();
+        result = 31 * result + event.hashCode();
         return result;
     }
 

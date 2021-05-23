@@ -4,12 +4,13 @@ import muni.pa165.api.dto.UserAuthenticateDTO;
 import muni.pa165.api.dto.UserDTO;
 import muni.pa165.api.facade.UserFacade;
 import muni.pa165.persistence.entity.User;
-import muni.pa165.services.converter.DozerConverter;
 import muni.pa165.services.UserService;
+import muni.pa165.services.converter.DozerConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -19,12 +20,13 @@ import java.util.Optional;
  */
 
 @Service
+@Transactional
 public class UserFacadeImpl implements UserFacade {
     @Autowired
-    private UserService userService;
+    UserService userService;
 
-    @Inject
-    private DozerConverter dozerConverter;
+    @Autowired
+    DozerConverter dozerConverter;
 
     public UserFacadeImpl(UserService service,DozerConverter converter){
         userService = service;
@@ -45,10 +47,9 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public UserDTO registerUser(UserDTO u) {
-        User userEntity = dozerConverter.convert(u, User.class);
-        userService.registerUser(userEntity);
-        u.setId(userEntity.getId());
-
+        User user = dozerConverter.convert(u, User.class);
+        userService.registerUser(user);
+        u.setId(user.getId());
         return u;
     }
 
@@ -61,6 +62,11 @@ public class UserFacadeImpl implements UserFacade {
     public boolean authenticate(UserAuthenticateDTO u) {
         Optional<User> user = userService.findUserByEmail(u.getEmail());
         return user.isPresent() && userService.authenticate(user.get(), u.getPassword());
+    }
+
+    @Override
+    public boolean delete(long id) {
+        return userService.delete(id);
     }
 
     @Override

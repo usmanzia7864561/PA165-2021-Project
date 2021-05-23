@@ -1,6 +1,7 @@
 package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.Event;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Optional;
  *
  * @author Usman Zia
  */
+@Repository
 public interface EventDao {
 
     Optional<Event> create(Event event);

@@ -2,6 +2,7 @@ package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.UserType;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
  * @author Muhammad Abdullah
  */
 
+@Repository
 public interface UserDao {
 
     void create(User user);

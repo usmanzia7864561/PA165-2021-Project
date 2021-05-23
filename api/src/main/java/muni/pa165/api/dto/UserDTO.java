@@ -26,6 +26,14 @@ public class UserDTO {
 
     public UserDTO() { }
 
+    public UserDTO(Long id,String name, String email, String password, UserType type) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.type = type;
+    }
+
     public UserDTO(String name, String email, String password, UserType type) {
         this.name = name;
         this.email = email;

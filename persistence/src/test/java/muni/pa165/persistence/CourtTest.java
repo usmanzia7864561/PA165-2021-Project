@@ -1,6 +1,5 @@
-package muni.pa165;
+package muni.pa165.persistence;
 
-import muni.pa165.persistence.PersistenceApplicationContext;
 import muni.pa165.persistence.dao.CourtDao;
 import muni.pa165.persistence.entity.Court;
 import muni.pa165.persistence.entity.Event;
@@ -24,7 +23,6 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 
 /**
  * Court Test

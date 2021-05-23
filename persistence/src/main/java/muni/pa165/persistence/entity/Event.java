@@ -1,4 +1,5 @@
 package muni.pa165.persistence.entity;
+
 import muni.pa165.persistence.enums.EventType;
 
 import javax.persistence.*;
@@ -39,7 +40,7 @@ public class Event {
     private LocalDate eventDate;
 
     @Column(nullable = false)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private EventType eventType;
 
     @ManyToOne
@@ -48,8 +49,7 @@ public class Event {
     @ManyToOne
     private Court court;
 
-    @ManyToMany
-    @MapsId("event")
+    @OneToMany(mappedBy = "event")
     private Set<Participant> participants = new HashSet<>();
 
     public Event() { }
@@ -90,13 +90,44 @@ public class Event {
 
     public Court getCourt() { return this.court; }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public void setEventType(EventType eventType) {
+        this.eventType = eventType;
+    }
+
+    public void setParticipants(Set<Participant> participants) {
+        this.participants = participants;
+    }
+
     public void setCourt(Court court) {
         this.court = court;
         court.addEvent(this);
     }
 
     public void addParticipant(Participant participant){
-        participant.addEvent(this);
         this.participants.add(participant);
     }
 
@@ -106,16 +137,8 @@ public class Event {
 
     public void removeParticipant(Participant participant){
         this.participants.remove(participant);
-        participant.removeEvent(this);
     }
-/*
-    @PreRemove
-    public void removeParticipantsFromEvent(){
-        for (Participant participant:this.participants){
-            participant.removeEvent(this);
-        }
-    }
-*/
+
     @PreRemove
     public void removeEventFromCourt(){
         this.court.removeEvent(this);

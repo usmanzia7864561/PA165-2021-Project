@@ -1,4 +1,4 @@
-package muni.pa165;
+package muni.pa165.persistence;
 
 import muni.pa165.persistence.PersistenceApplicationContext;
 import muni.pa165.persistence.dao.CourtDao;

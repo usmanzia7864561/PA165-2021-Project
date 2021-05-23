@@ -1,6 +1,8 @@
 package muni.pa165.persistence.dao;
 
 import muni.pa165.persistence.entity.Participant;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +12,7 @@ import java.util.Optional;
  * @author Muhammad Abdullah
  */
 
+@Repository
 public interface ParticipantDao {
     /**
      * create new participant

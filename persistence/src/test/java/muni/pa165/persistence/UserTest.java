@@ -1,6 +1,5 @@
-package muni.pa165;
+package muni.pa165.persistence;
 
-import muni.pa165.persistence.PersistenceApplicationContext;
 import muni.pa165.persistence.dao.UserDao;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.UserType;
@@ -33,7 +32,7 @@ public class UserTest extends AbstractTestNGSpringContextTests {
     private EntityManager entitymanager;
 
     @Inject
-    private  UserDao userDao;
+    private UserDao userDao;
 
     private User manager;
     private User participant;

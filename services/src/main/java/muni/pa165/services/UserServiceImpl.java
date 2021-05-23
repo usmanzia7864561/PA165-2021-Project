@@ -3,6 +3,7 @@ package muni.pa165.services;
 import muni.pa165.persistence.dao.UserDao;
 import muni.pa165.persistence.entity.User;
 import muni.pa165.persistence.enums.UserType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import java.util.Optional;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    @Inject
+    @Autowired
     private UserDao userDao;
 
     public UserServiceImpl() { }
@@ -28,7 +29,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User registerUser(User user) throws ValidationException, DataAccessException {
         if (this.findUserByEmail(user.getEmail()).isPresent()) throw new ValidationException("Email is already registered");
-
         user.setPassword(createHash(user.getPassword()));
         userDao.create(user);
         return user;
@@ -62,6 +62,17 @@ public class UserServiceImpl implements UserService {
             return Optional.empty();
         }
     }
+
+    @Override
+    public boolean delete(long id) {
+        Optional<User> user = userDao.findById(id);
+        if (user.isPresent()){
+            userDao.remove(user.get());
+            return true;
+        }
+        return false;
+    }
+
     public static String createHash(String password) {
         BCryptPasswordEncoder bCryptPasswordEncoder =
                 new BCryptPasswordEncoder(20, new SecureRandom());
