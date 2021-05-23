@@ -35,12 +35,12 @@ public class EventServicesTest {
 
     private Event event;
 
-    @Ignore
+
     public Event getEvent(){
         return new Event("ABC Tournament", LocalTime.NOON,LocalTime.MIDNIGHT, LocalDate.now(), EventType.TOURNAMENT);
     }
 
-    @Ignore
+
     @BeforeClass
     public void setup() throws ServiceException {
         eventService = new EventServiceImpl();
@@ -49,7 +49,7 @@ public class EventServicesTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Ignore
+
     @BeforeMethod
     public void beforeMocks(){
         when(eventDao.create(any())).thenReturn(Optional.of(event));
@@ -59,7 +59,7 @@ public class EventServicesTest {
         when(eventDao.findByRange(LocalDate.now(),Optional.empty())).thenReturn(List.of(event));
     }
 
-    @Ignore
+
     @Test
     public void createEventTest(){
         Optional<Event> e = eventService.createEvent(getEvent());
@@ -68,7 +68,7 @@ public class EventServicesTest {
         Assert.assertEquals(e, Optional.of(event));
     }
 
-    @Ignore
+
     @Test
     public void findEventByIdTest(){
         Optional<Event> eventById = eventService.getEventById(2L);
@@ -77,7 +77,7 @@ public class EventServicesTest {
         Assert.assertEquals(Optional.of(event), eventById);
     }
 
-    @Ignore
+
     @Test
     public void fetchAllEventsTest(){
         List<Event> events = eventService.getAllEvents();
@@ -86,7 +86,7 @@ public class EventServicesTest {
         Assert.assertTrue(events.contains(event));
     }
 
-    @Ignore
+
     @Test
     public void fetchAllByRangeEventsTest(){
         List<Event> events = eventService.getTodayEvents();

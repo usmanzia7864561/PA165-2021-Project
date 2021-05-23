@@ -55,7 +55,6 @@
         <maven.compiler.target>11</maven.compiler.target>
         <start-class>muni.pa165.rest.MainApplication</start-class>
         <skipTests>true</skipTests>
-
     </properties>
 
     <dependencies>

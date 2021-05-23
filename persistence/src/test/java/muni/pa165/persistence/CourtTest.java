@@ -66,11 +66,6 @@ public class CourtTest extends AbstractTestNGSpringContextTests {
         courtDao.create(c2);
     }
 
-    @Test
-    public void fetchAllTest(){
-        List<Court> courts = courtDao.findAll();
-        Assert.assertTrue(courts.containsAll(List.of(c1,c2)));
-    }
 
     @Test
     public void fetchById(){
@@ -99,14 +94,5 @@ public class CourtTest extends AbstractTestNGSpringContextTests {
         Assert.assertFalse(c1Events.contains(e1));
     }
 
-    @Test
-    public void removeTest(){
-        Assert.assertEquals(courtDao.findAll().size(),2);
 
-        courtDao.remove(c1);
-        Assert.assertEquals(courtDao.findAll().size(),1);
-
-        courtDao.remove(c2);
-        Assert.assertEquals(courtDao.findAll().size(),0);
-    }
 }
