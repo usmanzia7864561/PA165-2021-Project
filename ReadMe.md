@@ -12,7 +12,11 @@ other functionality other than that.
 The Manager and Tennis User can also log in to the system and see the status of 
 there profile and other statistics like events, participants etc.
 
+To Run the project please use the following commands.
 
+`mvn clean install`
+
+`cd rest && mvn clean install spring-boot:run`
 
 **Diagram**
 
