@@ -26,11 +26,9 @@ public class CourtDaoImpl implements CourtDao
     public CourtDaoImpl() { }
 
     @Override
-    public <Optional> java.util.Optional<Court> create(Court court) {
-
+    public Optional<Court> create(Court court) {
         this.entityManager.persist(court);
         return this.findById(court.getId());
-
     }
 
     @Override
@@ -49,7 +47,8 @@ public class CourtDaoImpl implements CourtDao
 
     @Override
     public void remove(Court court) {
-        this.entityManager.remove(court);
+        Court mergedCourt = this.entityManager.merge(court);
+        this.entityManager.remove(mergedCourt);
     }
 
     @Override
@@ -61,8 +60,9 @@ public class CourtDaoImpl implements CourtDao
     public Optional<Event> addEventToCourt(long courtId, Event event) {
         Optional<Court> court = this.findById(courtId);
         if (court.isPresent()){
-            court.get().addEvent(event);
-            return Optional.ofNullable(event);
+            event.setCourt(court.get());
+            this.entityManager.persist(event);
+            return Optional.of(event);
         }
         return Optional.empty();
     }

@@ -47,7 +47,7 @@ public class EventServiceImpl  implements EventService {
     public boolean participantAvailability(Participant p)
     {
         List participantEventInfo = eventDao.calculateParticipantEventTimeToday(p.getId());
-        Integer totalTime = Integer.parseInt(participantEventInfo.get(0).toString());
+        int totalTime = Integer.parseInt(participantEventInfo.get(0).toString());
         return totalTime <= 2;
     }
 

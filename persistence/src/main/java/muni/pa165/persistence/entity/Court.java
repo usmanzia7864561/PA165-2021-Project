@@ -33,7 +33,7 @@ public class Court {
     @Column(nullable = false , columnDefinition = "boolean default false")
     private Boolean isAvailable;
 
-    @OneToMany(mappedBy = "court",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "court", orphanRemoval = true)
     private Set<Event> events = new HashSet<>();
 
     @Column
@@ -58,6 +58,10 @@ public class Court {
         this.isAvailable = isAvailable;
         this.events = events;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

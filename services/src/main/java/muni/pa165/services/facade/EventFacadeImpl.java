@@ -45,6 +45,7 @@ public class EventFacadeImpl implements EventFacade {
     @Override
     public EventDTO createEvent(long courtId, EventDTO eventDTO) {
         Event e = dozerConverter.convert(eventDTO, Event.class);
+        System.out.println("e after parse " + e);
         Optional<Event> event = courtService.addEventToCourt(courtId,e);
         return event.map(value -> dozerConverter.convert(value, EventDTO.class)).orElse(null);
     }

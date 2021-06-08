@@ -50,7 +50,7 @@ public class EventDaoImpl implements  EventDao {
 
     @Override
     public void remove(Event event) {
-        this.entityManager.remove(event);
+        this.entityManager.remove(this.entityManager.merge(event));
     }
 
     @Override
@@ -89,7 +89,12 @@ public class EventDaoImpl implements  EventDao {
     @Override
     public Participant addParticipant(long eventId, Participant participant) {
         Optional<Event> event = this.findById(eventId);
-        event.ifPresent(value -> value.addParticipant(participant));
+        if (event.isPresent()) {
+            event.get().addParticipant(participant);
+
+            System.out.println("Saving participant " + participant);
+            this.entityManager.persist(participant);
+        }
         return participant;
     }
 
