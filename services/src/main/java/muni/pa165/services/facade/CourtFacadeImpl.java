@@ -45,6 +45,7 @@ public class CourtFacadeImpl implements CourtFacade {
 
     @Override
     public void remove(CourtDTO court) {
+        System.out.println("parsing court " + dozerConverter.convert(court,Court.class));
         courtService.remove(dozerConverter.convert(court,Court.class));
     }
 

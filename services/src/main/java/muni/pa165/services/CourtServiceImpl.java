@@ -38,6 +38,7 @@ public class CourtServiceImpl implements CourtService{
 
     @Override
     public Optional<Event> addEventToCourt(long courtId, Event event) {
-        return courtDao.addEventToCourt(courtId,event);
+        System.out.println("addEventToCourt : " + event);
+        return courtDao.addEventToCourt(courtId, event);
     }
 }

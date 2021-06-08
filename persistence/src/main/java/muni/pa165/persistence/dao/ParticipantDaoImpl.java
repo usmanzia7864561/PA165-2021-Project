@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 /*
  * Participant Data access object implementation
@@ -23,9 +22,6 @@ import java.util.Set;
 public class ParticipantDaoImpl implements ParticipantDao {
     @PersistenceContext
     private EntityManager entityManager;
-
-    public ParticipantDaoImpl() {
-    }
 
     @Override
     public Optional<Participant> create(Participant participant) {
@@ -49,7 +45,7 @@ public class ParticipantDaoImpl implements ParticipantDao {
 
     @Override
     public void remove(Participant participant) {
-        this.entityManager.remove(participant);
+        this.entityManager.remove(this.entityManager.merge(participant));
     }
 
     @Override
@@ -59,6 +55,6 @@ public class ParticipantDaoImpl implements ParticipantDao {
 
     @Override
     public List<Participant> getByEventParticipants(long eventId) {
-        return List.copyOf(this.entityManager.find(Event.class,eventId).getParticipants());
+        return List.copyOf(this.entityManager.find(Event.class, eventId).getParticipants());
     }
 }

@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
@@ -35,18 +36,29 @@ public class JWTFilter  extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
+        System.out.println("header : header " + header);
         if (isEmpty(header)) {
             chain.doFilter(request, response);
             return;
         }
+
         String token = header.substring("Bearer ".length());
+        System.out.println("jwtTokenUtil.getEmailFromToken(token)" + token);
 
         if (!jwtTokenUtil.validateToken(token)) {
+            System.out.println("Not a valid token");
             chain.doFilter(request, response);
             return;
         }
 
+        System.out.println("jwtTokenUtil.getEmailFromToken(token)" + jwtTokenUtil.getEmailFromToken(token));
+
         UserResponseDTO userDTO = userFacade.findUserByEmail(jwtTokenUtil.getEmailFromToken(token));
+        if (userDTO ==null){
+            chain.doFilter(request, response);
+            return;
+        }
+
         UserDetails userDetails = null;
 
         if (!userDTO.getEmail().isEmpty()){

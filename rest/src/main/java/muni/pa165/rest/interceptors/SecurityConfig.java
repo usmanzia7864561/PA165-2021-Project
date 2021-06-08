@@ -1,6 +1,5 @@
 package muni.pa165.rest.interceptors;
 
-import muni.pa165.api.dto.UserDTO;
 import muni.pa165.api.dto.UserResponseDTO;
 import muni.pa165.api.facade.UserFacade;
 import muni.pa165.persistence.enums.UserType;
@@ -16,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,14 +22,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Set;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
         securedEnabled = true,
         jsr250Enabled = true,
         prePostEnabled = true)
-public class AuthFilter  extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserFacade userFacade;
     @Autowired
@@ -45,7 +42,7 @@ public class AuthFilter  extends WebSecurityConfigurerAdapter {
             if (userDTO.getEmail().isEmpty()){
                 throw new UsernameNotFoundException("not a valid user");
             }
-
+            System.out.println("In SecurityConfig.");
             List<Roles> roles = userDTO.getType() == UserType.MANAGER? List.of(new Roles(Roles.MANAGER),new Roles(Roles.TENNIS_USER)):List.of(new Roles(Roles.TENNIS_USER));
             return new User(userDTO.getEmail(), userDTO.getPassword(), roles);
         });
@@ -71,8 +68,16 @@ public class AuthFilter  extends WebSecurityConfigurerAdapter {
                         }
                 )
                 .and();
+        System.out.println("In http SecurityConfig.");
 
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests()
+                .antMatchers("/user/*").hasAuthority(Roles.MANAGER)
+                .antMatchers(HttpMethod.POST,"/court/*").hasAuthority(Roles.MANAGER)
+                .antMatchers(HttpMethod.DELETE,"/court/*").hasAuthority(Roles.MANAGER)
+                .antMatchers(HttpMethod.PUT,"/court/*").hasAuthority(Roles.MANAGER)
+                .antMatchers(HttpMethod.GET,"/court/*").hasAnyAuthority(Roles.MANAGER,Roles.TENNIS_USER)
+                .antMatchers("/event/*").hasAnyAuthority(Roles.MANAGER,Roles.TENNIS_USER)
+                .antMatchers("/auth/*").permitAll();
         http.addFilterBefore(jwtTokenFilter,UsernamePasswordAuthenticationFilter.class);
     }
 

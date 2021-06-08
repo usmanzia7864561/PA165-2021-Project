@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParticipantFacadeImpl implements ParticipantFacade {
@@ -50,7 +51,8 @@ public class ParticipantFacadeImpl implements ParticipantFacade {
 
     @Override
     public ParticipantDTO findById(Long id) {
-        return dozerConverter.convert(participantService.findById(id),ParticipantDTO.class);
+        Optional<Participant> participant = participantService.findById(id);
+        return participant.map(value -> dozerConverter.convert(value, ParticipantDTO.class)).orElse(null);
     }
 
     @Override

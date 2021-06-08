@@ -17,7 +17,6 @@ import java.util.Set;
  */
 @Entity
 public class Event {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,7 +47,7 @@ public class Event {
     @ManyToOne
     private Court court;
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<Participant> participants = new HashSet<>();
 
     public Event() { }
